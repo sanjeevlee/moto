@@ -1,0 +1,51 @@
+{
+  "webTitle": "",
+  "navbarItemList": [
+    {
+      "id": 1,
+      "label": "HOME",
+      "url": "/",
+      "icon": "BsChevronRight"
+    },
+    {
+      "id": 2,
+      "label": "ABOUT",
+      "url": "/about",
+      "icon": "BsChevronRight"
+    },
+    {
+      "id": 3,
+      "label": "BLOG",
+      "url": "/blog",
+      "icon": "BsChevronRight"
+    },
+    {
+      "id": 4,
+      "label": "SERVICE",
+      "url": "/service",
+      "icon": "BsChevronRight"
+    },
+    {
+      "id": 5,
+      "label": "CONTACT",
+      "url": "/contact",
+      "icon": "BsChevronRight"
+    },
+    {
+      "id": 6,
+      "label": "LOGIN",
+      "url": "/signin",
+      "icon": "BsChevronRight"
+    },
+    {
+      "id": 7,
+      "label": "SIGN UP",
+      "url": "/signup",
+      "icon": "BsChevronRight"
+    }
+  ],
+  "aboutUs": {
+    "title": "AboutUs",
+    "image": "about.png"
+  }
+}
