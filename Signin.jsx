@@ -185,7 +185,7 @@ const SignIn = () => {
                   </div>
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100">
+                <Button  type="submit" className="w-100">
                   Sign In
                 </Button>
               </Form>

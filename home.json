@@ -33,7 +33,7 @@
     },
     {
       "id": 6,
-      "label": "LOGIN",
+      "label": "SIGN IN",
       "url": "/signin",
       "icon": "BsChevronRight"
     },
@@ -44,8 +44,26 @@
       "icon": "BsChevronRight"
     }
   ],
-  "aboutUs": {
-    "title": "AboutUs",
-    "image": "about.png"
-  }
+  "foodItems": [
+    {
+      "name": "Cheeseburger with Bacon",
+      "image": "https://via.placeholder.com/150",
+      "description": "more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+    },
+    {
+      "name": "Dosa with Fishcake",
+      "image": "https://via.placeholder.com/150",
+      "description": "more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+    },
+    {
+      "name": "Classic Bacon Hamburger",
+      "image": "https://via.placeholder.com/150",
+      "description": "more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+    },
+    {
+      "name": "Thin Meat",
+      "image": "https://via.placeholder.com/150",
+      "description": "more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+    }
+  ]
 }

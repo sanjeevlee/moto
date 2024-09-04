@@ -7,6 +7,8 @@ import Signup from './Signup';
 import SignIn from './Signin';
 // import'./reg.css';
 import RegisterForm from './regform';
+import  PopularFoods from './image';
+
 function App() {
   return (
     <div className="App">
@@ -16,6 +18,8 @@ function App() {
      {/* <Signup/> */}
      {/* <SignIn/> */}
      {/* <RegisterForm/> */}
+     {/* <ImageUploader/> */}
+     {/* < PopularFoods/> */}
       </header>
     </div>
   );

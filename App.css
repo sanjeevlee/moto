@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 *{
   margin: 0px;
   padding: 0px;
@@ -66,7 +68,9 @@
   padding : 10px;
   text-align: center;
 }
-
+.search_btn :hover{
+background-color: #262625;
+}
 .dropdown {
   width: 200px;
   margin-left: 20px;
@@ -88,7 +92,7 @@
   width: 100%;
   font-size: 50px;
   color: #262625;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 2rem;
 }
 
@@ -122,6 +126,114 @@
   transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
   z-index: 9;
 }
+
+/* Container styling */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.service {
+  width: 145px;
+  color: #262625;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: -35px;
+}
+
+.service :hover {
+  color:#e42e0c ;
+}
+
+/* Section Heading */
+.container h2 {
+  width: 100%;
+    float: left;
+    font-size: 40px;
+    color: #302f2f;
+    font-weight: bold;
+}
+.card{
+  border-style: none;
+  box-shadow: 0px;
+}
+/* Section Subtext */
+.container .para {
+  width: 100%;
+  float: left;
+  font-size: 16px;
+  color: #262625;
+  margin-top: -15px;
+}
+.images{
+  width: 100%;
+  float: left;
+  height:  145px;
+}
+
+.card-title {
+   
+  width: 100%;
+  float: left;
+  font-size: 19px;
+  color: #343434;
+  font-weight: bold;
+}
+
+.card-text {
+    width: 100%;
+    color: #343434;
+    font-size: 15px;
+    float: left;
+   margin-bottom: 20px;
+}
+
+/* Read More Button */
+.readmore {
+  width: 170px;
+  display: inline-block;
+   color: #fff; 
+  border: none; 
+  cursor: pointer;
+}
+.readmore a {
+  width: 100%;
+  float: left;
+  font-size: 18px;
+  color: #fefefd;
+  background-color: #e42e0c;
+  padding : 10px;
+  text-align: center;
+}
+.readmore :hover{
+background-color: #262625;
+}
+/* .foodies::before::before {
+  content: '';
+  position: absolute;
+  width: 110px;
+  height: 180px;
+  background-image: url('./images/img-5.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  left: -120px;
+  top: 120px;
+}
+.foodies::after {
+  content: '';
+  position: absolute;
+  width: 110px;
+  height: 180px;
+  background-image: url('./images/img-6.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  right: -120px;
+  top: 150px;
+}  */
+
+
 
  /* Responsive design */
 
@@ -158,25 +270,45 @@
     height: 250px;
   }
   .anime {
-    width: 60%;
+    width: 40%;
     height: 200px;
   }
   .search {
-    padding: 5px;
+    padding: 15px;
   }
   .search_btn{
-    margin-left: 390px;
-  }
+    margin-left: 280px;  }
   .dropdown {
-    width: 120px;
+    width: 145px;
     margin-left: 5px;
   }
   .dropdown1 {
-    width: 120px;
+    width: 145px;
   }
- 
+  .banner-title {
+    font-size: 2.5rem;
+  }
+
+
+.banner-text {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
 }
 
+.card-img-top {
+  height: 200px;
+ 
+}  
+.banner-section {
+  height: 50vh;
+  padding: 0 20px;
+}
+.banner-title {
+font-size: 3rem;
+font-weight: bold;
+
+}
+}
 /* Small devices (smartphones, 480px and up) */
 @media only screen and (max-width: 480px) {
   .bannerone {
@@ -193,10 +325,16 @@
 
   }
   .dropdown1, .dropdown {
-    width: 100%;
+    width: 90%;
     margin: 10px 0;
   }
   .search_btn{
-    margin-left: 0px;
+    margin-left: 15px;
+  }
+  .banner2{
+    margin-top: 365px;
+  }
+  .service{
+    margin-top: 0;
   }
 }
