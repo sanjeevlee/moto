@@ -5,8 +5,11 @@ import Signup from './Signup';
 import SignIn from './Signin';
 // import'./reg.css';
 import RegisterForm from './regform';
-// import AboutUs from './Aboutus';
-
+import AboutUs from './Aboutus';
+import  Footer from './Footer';
+import Service from './Service';
+import Navbar  from './Navbar';
+// import './Navbar.css';
 function App() {
   return (
     <div className="App">
@@ -16,6 +19,9 @@ function App() {
      {/* <SignIn/> */}
      {/* <RegisterForm/> */}
      {/* <AboutUs/> */}
+     {/* < Footer/> */}
+     {/* <Service/> */}
+     {/* <Navbar/> */}
       </header>
     </div>
   );

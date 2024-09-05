@@ -46,7 +46,7 @@
     
   }
   
-   .search{
+   .readmore1{
   width: 25%;
   height: 50px;
   float: left;
@@ -75,7 +75,7 @@
     }
   
   
-    .search {
+    .readmore1 {
         width: 33%;
         height: 55px;
     }    
@@ -98,7 +98,7 @@
       font-size: 0.95rem;
   
     }
-    .search {
+    .readmore1 {
         width: 50%;
         height: 60px;
     }
@@ -120,7 +120,7 @@
       width: 100%;
     }
   
-    .search {
+    .readmore1 {
         width: 55%;
      
     }

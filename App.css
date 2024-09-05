@@ -224,7 +224,7 @@ background-color: #262625;
 .readmore :hover{
 background-color: #262625;
 }
-.card::before {
+/* .card::before {
   content: '';
   position: absolute;
   width: 110px;
@@ -245,7 +245,7 @@ background-color: #262625;
   background-repeat: no-repeat;
   right: -120px;
   top: 150px;
-} 
+}  */
 
 
 /* about section */
@@ -444,12 +444,12 @@ font-size: 0.95rem;
   .banner2{
     margin-top: 365px;
   }
-  .service{
-    margin-top: 0;
-  }
   .about-container {
     display:table;
-        }
+  }
+  .service{
+    margin-top: 1;
+  }
 .text-container h2{
         margin-top: 40px;
        }

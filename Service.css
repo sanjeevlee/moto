@@ -1,0 +1,100 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .service {
+    width: 145px;
+    color: #262625;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: -35px;
+  }
+  
+  .service :hover {
+    color:#e42e0c ;
+  }
+  
+  /* Section Heading */
+  .container h2 {
+    width: 100%;
+      float: left;
+      font-size: 40px;
+      color: #302f2f;
+      font-weight: bold;
+  }
+  .card{
+    border-style: none;
+    box-shadow: 0px;
+  }
+  /* Section Subtext */
+  .container .para {
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #262625;
+    margin-top: -15px;
+  }
+  .images{
+    width: 100%;
+    float: left;
+    height:  145px;
+  }
+  
+  .card-title {
+     
+    width: 100%;
+    float: left;
+    font-size: 19px;
+    color: #343434;
+    font-weight: bold;
+  }
+  .cardbody{
+    width: 300px;
+  }
+  .card-text {
+      width: 100%;
+      color: #343434;
+      font-size: 15px;
+      float: left;
+     margin-bottom: 20px;
+  }
+  
+  /* Read More Button */
+  .readmore {
+    width: 170px;
+    display: inline-block;
+     color: #fff; 
+    border: none; 
+    cursor: pointer;
+  }
+  .readmore a {
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    color: #fefefd;
+    background-color: #e42e0c;
+    padding : 10px;
+    text-align: center;
+  }
+  .readmore :hover{
+  background-color: #262625;
+  }
+
+  @media only screen and (max-width: 1024px) {}
+
+  @media only screen and (max-width: 768px) {
+    .card-img-top {
+        height: 200px;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+
+    .banner2 {
+        margin-top: 365px;
+    }
+    .card-img-top {
+        height: 200px;
+    }
+  }
