@@ -14,7 +14,8 @@ const Project = () => {
   const { categories, foods } = foodData;
 
   return (
-   <> <div className="body">
+   <> 
+    <div className="body">
       <div className="background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 sticky top-0">
@@ -66,8 +67,9 @@ const Project = () => {
             </nav>
           </div>
         </div>
+        
 
-        {/* Mobile Menu */}
+        {/* {/ Mobile Menu /} */}
         <nav 
           className={`sm:hidden fixed top-0 left-0 w-3/4 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 ${showMenu ? 'translate-x-0' : '-translate-x-full'}`}
         >
@@ -93,8 +95,9 @@ const Project = () => {
               </a>
             ))}
           </div>
-        </nav>
+        </nav> 
 
+    
 {/* Banner Section */}
                <div className="bannerone">
                <div className="anime" w-full h-64 bg-cover bg-center></div>
@@ -104,29 +107,29 @@ const Project = () => {
             
                 <div className="dropdowns">
                 <select className="dropdown1">
-                <option value="">city</option>
-                <option value="New York">New York</option>
-                <option value="Los Angeles">Los Angeles</option>
-                <option value="Chicago">Chicago</option>
+                <option className="option">city</option>
+                <option className="option">Peelamedu</option>
+                <option className="option">Fun Mall</option>
+                <option className="option">Nava India</option>
                 </select>
                 <select className="dropdown">
-                <option value="">restaurent</option>
-                <option value="Italian">Italian</option>
-                <option value="Chinese">Chinese</option>
-                <option value="Indian">Indian</option>
+                <option value="option">restaurent</option>
+                <option value="option">HariBhavan</option>
+                <option value="option">SMS</option>
+                <option value="option">Ariya</option>
                 </select>
                 <select className="dropdown">
-                <option value="">food</option>
-                <option value="Under $10">Under $10</option>
-                <option value="$10-$20">$10-$20</option>
-                <option value="Over $20">Over $20</option>
+                <option value="option">food</option>
+                <option value="option">Under $10</option>
+                <option value="option">$10-$20</option>
+                <option value="option">Over $20</option>
                 </select>
                 </div>
                 <div className="search_btn"><a href="#">Search Now</a></div>
                 </div>
                 </div>
                 </div>
-                </div>
+                
 {/* // end of first container */}
 
  <Container className="my-5">
@@ -155,7 +158,7 @@ const Project = () => {
 
                 <Card className="h-100 ">
                 <Card.Img variant="top" src={food.image} alt={food.name} className="card-img-top images" />
-                <Card.Body className="d-flex flex-column">
+                <Card.Body className="d-flex flex-column cardbody">
                 <Card.Title>{food.name}</Card.Title>
                 <Card.Text className="text">
                         {food.description}
@@ -169,6 +172,25 @@ const Project = () => {
           </div>
         
       </Container>
+      <div className="about-container">
+      <div className="image-container">
+        <img 
+          src="./images/about-img.png" 
+          alt="Delicious food" 
+          className="about-image" 
+        />
+      </div>
+      <div className="text-container">
+        <h2>About Us</h2>
+        <p>
+        Content here, content here', making it look like readable English.
+         Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for Content here, content here',
+          making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
+        </p>
+        <button className="readmore1"><a href="#">Read More</a></button>
+      </div>
+    </div>
+    </div>
 </>
 
   );

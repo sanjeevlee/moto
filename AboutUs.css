@@ -1,0 +1,128 @@
+.about-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+      background-image: url(./images/about-bg.png);
+    background-size:cover;
+    background-repeat: no-repeat;
+  }
+  
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    height: 500px;
+   }
+ 
+  .about-image {
+    max-width: 100%;
+     object-fit: cover;
+    height: 543px;
+    margin-top: -20px;
+    margin-left: 160px;
+  }
+  
+  .text-container {
+    flex: 1;
+    color: white;
+    padding: 10px;
+  }
+  
+  .text-container h2 {
+        width: 100%;
+        float: left;
+        font-size: 40px;
+        color: #fefefd;
+        font-weight: bold;
+        padding-bottom: 25px;
+  }
+  
+  .text-container p {
+       width: 70%;
+    
+    font-size: 16px;
+    color: #fefefd;
+    
+  }
+  
+   .search{
+  width: 25%;
+  height: 50px;
+  float: left;
+  padding: 8px 10px;
+  color: #292928;
+  background-color: #fefefd;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+ 
+ 
+  /* Media Queries for Responsiveness */
+  @media (max-width: 1024px) {
+    .about-container {
+      padding: 10px;
+    }
+    .about-image {
+              object-fit: fill;
+            margin-left: 0px;
+    }
+  
+    .text-container p {
+      width: 100%;
+    }
+  
+  
+    .search {
+        width: 33%;
+        height: 55px;
+    }    
+  }
+  
+  @media (max-width: 768px) {
+    .about-container {
+        text-align: left;
+    }
+  
+    .image-container, .text-container {
+      width: 100%;
+      }
+     .about-image {
+      width: 100%;
+     
+    }
+      .text-container p {
+      width: 90%;
+      font-size: 0.95rem;
+  
+    }
+    .search {
+        width: 50%;
+        height: 60px;
+    }
+  }
+ 
+  @media (max-width: 480px) {
+    .about-container {
+         display:table;
+             }
+   .text-container h2{
+             margin-top: 40px;
+            }
+    .text-container p {
+      width: 100%;
+      font-size: 16px;
+    }
+  
+    .about-image {
+      width: 100%;
+    }
+  
+    .search {
+        width: 55%;
+     
+    }
+  }
+  

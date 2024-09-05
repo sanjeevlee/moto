@@ -126,7 +126,19 @@ background-color: #262625;
   transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
   z-index: 9;
 }
-
+.option {
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 40px;
+  list-style: none;
+  min-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 29px;
+  text-align: left;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
 /* Container styling */
 
 .container {
@@ -181,7 +193,9 @@ background-color: #262625;
   color: #343434;
   font-weight: bold;
 }
-
+.cardbody{
+  width: 300px;
+}
 .card-text {
     width: 100%;
     color: #343434;
@@ -210,7 +224,7 @@ background-color: #262625;
 .readmore :hover{
 background-color: #262625;
 }
-/* .foodies::before::before {
+.card::before {
   content: '';
   position: absolute;
   width: 110px;
@@ -221,7 +235,7 @@ background-color: #262625;
   left: -120px;
   top: 120px;
 }
-.foodies::after {
+.card::after {
   content: '';
   position: absolute;
   width: 110px;
@@ -231,36 +245,112 @@ background-color: #262625;
   background-repeat: no-repeat;
   right: -120px;
   top: 150px;
-}  */
+} 
 
+
+/* about section */
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+    background-image: url(./images/about-bg.png);
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  height: 500px;
+ }
+
+.about-image {
+  max-width: 100%;
+   object-fit: cover;
+  height: 543px;
+  margin-top: -20px;
+  margin-left: 160px;
+}
+
+.text-container {
+  flex: 1;
+  color: white;
+  padding: 10px;
+}
+
+.text-container h2 {
+      width: 100%;
+      float: left;
+      font-size: 40px;
+      color: #fefefd;
+      font-weight: bold;
+      padding-bottom: 25px;
+}
+
+.text-container p {
+     width: 73%;
+  
+  font-size: 16px;
+  color: #fefefd;
+  
+}
+
+ .readmore1{
+width: 25%;
+height: 50px;
+float: left;
+padding: 8px 10px;
+color: #292928;
+background-color: #fefefd;
+text-align: center;
+font-size: 18px;
+margin-top: 30px;
+}
 
 
  /* Responsive design */
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 1024px) {
   .bannerone {
-    width: 80%;
+    width: 100%;
     height: 300px;
   }
   .anime {
-    width: 50%;
-    height: 250px;
+        height: 250px;
   }
   .search {
     padding: 15px;
   }
- 
+  
   .dropdown {
-    width: 150px;
+  
     margin-left: 10px;
   }
-  .dropdown1 {
-    width: 150px;
-  }
+ 
   .banner_taital {
     font-size: 40px;
   }
+  .about-container {
+    padding: 10px;
+  }
+  .about-image {
+            object-fit: fill;
+          margin-left: 0px;
+  }
+
+  .text-container p {
+    width: 100%;
+  }
+
+
+  .readmore1 {
+      width: 33%;
+      height: 55px;
+  }    
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -277,7 +367,7 @@ background-color: #262625;
     padding: 15px;
   }
   .search_btn{
-    margin-left: 280px;  }
+    margin-left: 263px;  }
   .dropdown {
     width: 145px;
     margin-left: 5px;
@@ -308,6 +398,26 @@ font-size: 3rem;
 font-weight: bold;
 
 }
+.about-container {
+  text-align: left;
+}
+
+.image-container, .text-container {
+width: 100%;
+}
+.about-image {
+width: 100%;
+
+}
+.text-container p {
+width: 90%;
+font-size: 0.95rem;
+
+}
+.readmore1 {
+  width: 50%;
+  height: 60px;
+}
 }
 /* Small devices (smartphones, 480px and up) */
 @media only screen and (max-width: 480px) {
@@ -337,4 +447,23 @@ font-weight: bold;
   .service{
     margin-top: 0;
   }
+  .about-container {
+    display:table;
+        }
+.text-container h2{
+        margin-top: 40px;
+       }
+.text-container p {
+ width: 100%;
+ font-size: 16px;
+}
+
+.about-image {
+ width: 100%;
+}
+
+.readmore1{
+   width: 60%;
+
+}
 }
