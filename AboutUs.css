@@ -1,3 +1,91 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.body{
+  color: #666666;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.80857;
+    font-weight: normal;
+ text-decoration: none;
+}
+.backclr{
+  width: 100%;
+ height: 80px;
+ background-color:#f8f9fa;
+ position: sticky;
+ top: 0;
+ z-index: 1000;
+}
+/* / //tonggle button / */
+.three svg {
+  width: 48px;
+  /* / Adjust size as needed / */
+  height: 38px;
+  /* / Adjust size as needed / */
+  stroke: black;
+  /* / Icon color / */
+  border: 1px solid black;
+  border-radius: 5px;
+ }
+ #hamburger-button {
+  /* border: none;
+  / Remove default border / */
+  background: transparent;
+  /* / Remove default background / */
+  padding: 0;
+  /* / Remove default padding / */
+  display: flex;
+  /* / Ensure content is centered / */
+  align-items: center;
+  /* / Center content vertically / */
+  justify-content: center;
+  /* / Center content horizontally / */
+}
+.close{
+  padding-top: 30px;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+
+/* / Navbar custom styles / */
+.navbar-custom .navbar-brand {
+  color: #fff;
+  font-weight: 600;
+}
+/* / Offcanvas styles / */
+.custom-offcanvas .offcanvas-body,
+.custom-offcanvas .offcanvas-header {
+  display: contents;
+  color: white;
+ background-color: #fff;
+}}
+@media (min-width: 1024px) {
+  #hamburger-button {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .spans{
+      display: none;
+        }
+
+}
+@media (max-width: 480px) {
+.custom-offcanvas .offcanvas-body,
+.custom-offcanvas .offcanvas-header {
+  display: contents;
+  color: white;
+ background-color: #fff;
+}
+.Offcanvas.Header{
+  padding-top: 30px;
+}
+
+}
 .about-container {
     display: flex;
     justify-content: space-between;
@@ -12,13 +100,13 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    height: 500px;
+    height:500px;  
    }
  
   .about-image {
     max-width: 100%;
      object-fit: cover;
-    height: 543px;
+    height:  540px;
     margin-top: -20px;
     margin-left: 160px;
   }
@@ -68,6 +156,7 @@
     .about-image {
               object-fit: fill;
             margin-left: 0px;
+            height: 528px;
     }
   
     .text-container p {

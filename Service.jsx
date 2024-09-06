@@ -104,7 +104,7 @@ return (
         </div>
       </nav> 
       </div>
-      </div>
+      
 <Container className="my-5">
   <div className="banner2">
         <h2 className="text mb-4">Popular Goods Foods</h2>
@@ -214,9 +214,10 @@ return (
  
        {/* Footer Bottom */}
        <div className="footer-bottom">
-         <p>2023 All Rights Reserved. Design by Free HTML Templates</p>
+         <p>2024 All Rights Reserved. Design by E.K.Sanjeev.</p>
        </div>
-     </footer></>
+     </footer>
+     </div>   </>
         );
     };
     export default Service;

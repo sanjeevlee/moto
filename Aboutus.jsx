@@ -97,7 +97,7 @@ const AboutUs = () => {
         </div>
       </nav> 
       </div>
-      </div>
+     
     <div>
       {/* About Us Section */}
       <div className="about-container">
@@ -195,9 +195,10 @@ const AboutUs = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p>2023 All Rights Reserved. Design by Free HTML Templates</p>
+          <p>2024 All Rights Reserved. Design by E.K.Sanjeev.</p>
         </div>
       </footer>
+    </div>
     </div></>
   );
 };

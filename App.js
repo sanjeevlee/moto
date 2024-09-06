@@ -8,20 +8,20 @@ import RegisterForm from './regform';
 import AboutUs from './Aboutus';
 import  Footer from './Footer';
 import Service from './Service';
-import Navbar  from './Navbar';
-// import './Navbar.css';
+import Nbarone  from './Navbar';
+import './Navbar.css';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-     <Project/>
+     {/* <Project/> */}
      {/* <Signup/> */}
      {/* <SignIn/> */}
      {/* <RegisterForm/> */}
      {/* <AboutUs/> */}
      {/* < Footer/> */}
      {/* <Service/> */}
-     {/* <Navbar/> */}
+     <Nbarone/>
       </header>
     </div>
   );

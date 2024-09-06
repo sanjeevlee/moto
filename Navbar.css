@@ -2,4 +2,73 @@
     width: 100%;
    height: 80px;
    background-color:#f8f9fa;
+   position: sticky;
+   top: 0;
+   z-index: 1000;
   }
+  /* / //tonggle button / */
+  .three svg {
+    width: 48px;
+    /* / Adjust size as needed / */
+    height: 38px;
+    /* / Adjust size as needed / */
+    stroke: black;
+    /* / Icon color / */
+    border: 1px solid black;
+    border-radius: 5px;
+   }
+   #hamburger-button {
+    /* border: none;
+    / Remove default border / */
+    background: transparent;
+    /* / Remove default background / */
+    padding: 0;
+    /* / Remove default padding / */
+    display: flex;
+    /* / Ensure content is centered / */
+    align-items: center;
+    /* / Center content vertically / */
+    justify-content: center;
+    /* / Center content horizontally / */
+  }
+  .close{
+    padding-top: 30px;
+  }
+
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
+  
+  /* / Navbar custom styles / */
+  .navbar-custom .navbar-brand {
+    color: #fff;
+    font-weight: 600;
+  }
+  /* / Offcanvas styles / */
+  .custom-offcanvas .offcanvas-body,
+  .custom-offcanvas .offcanvas-header {
+    display: contents;
+    color: white;
+   background-color: #fff;
+  }}
+  @media (min-width: 1024px) {
+    #hamburger-button {
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+    .spans{
+        display: none;
+          }
+
+  }
+  @media (max-width: 480px) {
+  .custom-offcanvas .offcanvas-body,
+  .custom-offcanvas .offcanvas-header {
+    display: contents;
+    color: white;
+   background-color: #fff;
+  }
+  .Offcanvas.Header{
+    padding-top: 30px;
+  }
+ 
+}
