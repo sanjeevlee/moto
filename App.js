@@ -14,14 +14,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-     {/* <Project/> */}
+     <Project/>
      {/* <Signup/> */}
      {/* <SignIn/> */}
      {/* <RegisterForm/> */}
      {/* <AboutUs/> */}
      {/* < Footer/> */}
      {/* <Service/> */}
-     <Nbarone/>
+     {/* <Nbarone/> */}
       </header>
     </div>
   );

@@ -3,7 +3,9 @@ import React from 'react';
 import './AboutUs.css';
 import './Footer.css';
 import  {  useEffect,useState } from 'react';
+import { Container, Button, Navbar, Nav, Offcanvas } from "react-bootstrap";
 import jsonData from './home.json';
+import { useNavigate } from "react-router-dom";
 import { FaLinkedinIn, FaYoutube, } from 'react-icons/fa';
 import { MdOutlineFacebook } from "react-icons/md";
 import { AiFillTwitterCircle } from "react-icons/ai";
@@ -13,6 +15,12 @@ import { AiFillInstagram } from "react-icons/ai";
 const AboutUs = () => {
   const [showMenu, setShowMenu] = useState(false);
   const navbarItemList = jsonData.navbarItemList;
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOffcanvasClose = () => setShowOffcanvas(false);
+  const handleOffcanvasShow = () => setShowOffcanvas(true);
+
   return (
     <> 
     <div className="body">
