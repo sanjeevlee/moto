@@ -104,15 +104,10 @@
   .service :hover {
     color:#e42e0c ;
   }
-  
-  /* Section Heading */
-  .container h2 {
-    width: 100%;
-      float: left;
-      font-size: 40px;
-      color: #302f2f;
-      font-weight: bold;
+  .bannertwo h2{
+    text-align: left;
   }
+
   .card{
     border-style: none;
     box-shadow: 0px;
@@ -179,9 +174,11 @@
     }
   }
   @media only screen and (max-width: 480px) {
-
-    .banner2 {
-        margin-top: 365px;
+    .foodss{
+      height: 70px;
+    }
+    .bannertwo h2{
+      font-size: 23px;
     }
     .card-img-top {
         height: 200px;

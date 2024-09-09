@@ -36,7 +36,7 @@ return (
     <Navbr/>
       
 <Container className="my-5">
-  <div className="banner2">
+  <div className="bannertwo">
         <h2 className="text mb-4">Popular Goods Foods</h2>
         <p className="text mb-5 para">
           Search for 'lorem ipsum' will uncover many web sites still in their infancy.
@@ -44,8 +44,8 @@ return (
 
        
        
-        <Row className="justify-content mb-4">
-              {jsonData.foods.categories.map((category, index) => (
+        <Row className="justify-content mb-4 foodss " >
+        {jsonData.foods.categories.map((category, index) => (
                 <Col key={index} xs={6} sm={2} md={2} className="text-center mb-2 service">
                   <div className={`category ${category === 'Biryani & Meat' ? 'active' : ''}`}>
                     {category}

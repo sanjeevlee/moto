@@ -112,9 +112,11 @@
     background-color: #fefefd;
     padding : 10px;
     text-align: center;
+    margin-top: 15px;
   }
   .More_btn :hover{
   background-color: #292928;
+  color:#f8f9fa;
   }
  
  

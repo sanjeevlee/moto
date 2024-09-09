@@ -144,7 +144,7 @@ const Project = () => {
               Search for 'lorem ipsum' will uncover many web sites still in their infancy.
             </p>
 
-            <Row className="justify-content mb-4">
+            <Row className="justify-content mb-4 foodss " >
               {jsonData.foods.categories.map((category, index) => (
                 <Col key={index} xs={6} sm={6} md={2} className="text-center mb-2 service">
                   <div className={`category ${category === 'Biryani & Meat' ? 'active' : ''}`}>
@@ -181,7 +181,9 @@ const Project = () => {
           <div className="text-container">
             <h2>About Us</h2>
             <p>
-              Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.
+            Content here, content here', making it look like readable English. Many desktop publishing packages and web page
+            editors now use Lorem Ipsum as their default model text, and a search for Content here, content here', making it 
+            look like readable English.Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
             </p>
             <button className="readmore1">
               <a href="#">Read More</a>

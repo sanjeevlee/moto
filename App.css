@@ -243,6 +243,12 @@ background-color: #262625;
     color: #302f2f;
     font-weight: bold;
 }
+.banner2 h2{
+  text-align: left;
+}
+.text-container h2{
+  text-align: left;
+}
 .card{
   border-style: none;
   box-shadow: 0px;
@@ -519,6 +525,12 @@ font-size: 0.95rem;
   }
   .banner2{
     margin-top: 365px;
+  }
+  .banner2 h2{
+    font-size: 23px;
+  }
+  .foodss{
+    height: 70px;
   }
   .about-container {
     display:table;
