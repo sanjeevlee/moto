@@ -15,6 +15,7 @@
 
 /* / //tonggle button / */
 .three svg {
+  
   width: 48px;
   /* / Adjust size as needed / */
   height: 38px;
@@ -24,6 +25,14 @@
   border: 1px solid black;
   border-radius: 5px;
  }
+ .offcanvas-header .btn-close {
+  margin-top: 8px;
+  margin-left: 330px;
+  float: right;
+  /* padding: calc(var(--bs-offcanvas-padding-y)* .5) calc(var(--bs-offcanvas-padding-x)* .5); */
+  font-size: 25px;
+  /* margin: calc(-.5* var(--bs-offcanvas-padding-y)) calc(-.5* var(--bs-offcanvas-padding-x)) calc(-.5* var(--bs-offcanvas-padding-y)) auto; */
+}
  #hamburger-button {
   /* border: none;
   / Remove default border / */

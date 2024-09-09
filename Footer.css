@@ -1,4 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.body{
+  color: #666666;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.80857;
+    font-weight: normal;
+ text-decoration: none;
+}
+
 /* Reset and Box Sizing */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +27,9 @@ footer {
   padding: 43px 0;
   font-family: Arial, sans-serif;
 }
-
+h2{
+  text-align: left;
+}
 .footer-container {
   display: flex;
   flex-wrap: wrap;
@@ -39,24 +56,21 @@ footer {
   width: 100%;
   font-size: 24px;
   color: #fefefd;
+  text-align: left;
 }
 
 .footer-section p,
 .footer-section ul,
 .footer-section form {
-  width: 90%;
+  width: 99%;
   float: left;
   font-size: 16px;
   color: #838382;
-  margin-top: 15px;
+  
 }
 
 .footer-section ul {
   list-style: none;
-}
-
-.footer-section ul li {
-  margin-bottom: 5px;
 }
 
 .footer-section ul li a {
@@ -71,7 +85,10 @@ footer {
 .footer-section ul li a:hover {
   color: #ffffff;
 }
-
+.active a {
+  color: #fff; /* Change text color */
+ 
+}
 .social-icons li {
   display: flex;
   align-items: center;
@@ -84,7 +101,8 @@ footer {
 
 .social-icons li a svg {
   margin-right: 8px;
-  font-size: 18px;
+  font-size: 22px;
+  color: #fefefd;
 }
 
 .footer-section form {
@@ -144,18 +162,25 @@ footer {
 /* Responsive Styles */
 
 /* Tablets (up to 768px) */
+/* Tablets (up to 768px) */
 @media (max-width: 768px) {
-  
+ 
+
   .about1 {
-    padding-left: 90px;
-    padding-right: 0;
+    padding-left: 50px;
+    padding-right: 50px;
   }
 
   .footer-section {
-    margin: 10px 0;
-    /* text-align: center; */
+    margin: 0px 0;
+   
   }
-
+  .links1 {
+    margin-left: 100px;
+}
+.newsletter{
+  margin-left: 100px;
+}
   .footer-section form {
     justify-content: center;
   }
@@ -166,25 +191,34 @@ footer {
   }
 
   .subscribe_bt {
-    width: 100%;
-    padding-top: 0;
+    width: 66%;
     text-align: center;
-    margin-top: 10px;
+   
+  }
+
+  .footer-section h2 {
+    font-size: 24px;
+  }
+
+  .footer-section ul li {
+    
+    font-size: 16px;
+  }
+
+  .footer-section ul li a {
+    font-size: 16px;
+  }
+.update_mail{
+  width: 100%;
+}
+  .social-icons {
+    width: 100%;
+    justify-content: space-around; /* Adjust icon spacing for smaller screens */
   }
 }
 
 /* Mobile (up to 480px) */
 @media (max-width: 480px) {
-  /* .footer-section h2 {
-    font-size: 16px;
-  } */
-
-  /* .footer-section p,
-  .footer-section ul,
-  .footer-section form {
-    font-size: 12px;
-  } */
-
   .social-icons li a svg {
     font-size: 16px;
   }
@@ -194,22 +228,46 @@ footer {
   }
 
   .about1 {
-    padding-left: 35px;
+    padding-left: 5px;
   }
 
   .footer-section {
     margin: 5px 0;
+    margin-left: 10px;
   }
 
   .update_mail {
     height: 40px;
     font-size: 14px;
+    margin-right: 26px;
   }
-.subscribe_bt{
+
+  .footer-section .links1 h2 {
+    margin-top: 10px;
+    margin-left: -35px;
+  }
+
+  .subscribe_bt {
     width: 65%;
-    margin-right: 100px;}
+    margin-right: 100px;
+   
+  }
+
   .footer-bottom p {
     font-size: 12px;
   }
-}
 
+  /* Make the font smaller for links on mobile */
+  .footer-section ul li a {
+    font-size: 16px;
+  }
+
+  /* Ensure social icons are smaller */
+  .social-icons li a svg {
+    font-size: 18px;
+  }
+
+  .footer-section h2 {
+    font-size: 18px;
+  }
+}

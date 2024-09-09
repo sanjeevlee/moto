@@ -97,18 +97,25 @@
     
   }
   
-   .readmore1{
-  width: 25%;
-  height: 50px;
-  float: left;
-  padding: 8px 10px;
-  color: #292928;
-  background-color: #fefefd;
-  text-align: center;
-  font-size: 18px;
-  margin-top: 30px;
-}
-
+  .More_btn {
+    width: 170px;
+    display: inline-block;
+     color: #fff; 
+    border: none; 
+    cursor: pointer;
+  }
+  .More_btn a {
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    color: #292928;
+    background-color: #fefefd;
+    padding : 10px;
+    text-align: center;
+  }
+  .More_btn :hover{
+  background-color: #292928;
+  }
  
  
   /* Media Queries for Responsiveness */

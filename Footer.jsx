@@ -10,14 +10,14 @@ import { AiFillInstagram } from "react-icons/ai";
 
 const Footer = () => {
   return (
+    <div className="body">
     <footer>
       <div className="footer-container about1">
         {/* About Section */}
         <div className="footer-section about">
           <h2>ABOUT</h2>
           <p>
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-          The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
           </p>
         </div>
 
@@ -25,7 +25,7 @@ const Footer = () => {
         <div className="footer-section links1">
           <h2>LINKS</h2>
           <ul>
-            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Software</a></li>
             <li><a href="#">Company</a></li>
@@ -79,9 +79,9 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="footer-bottom">
-        <p>2023 All Rights Reserved. Design by Free HTML Templates</p>
+        <p>2024 All Rights Reserved. Design by E.K.Sanjeev</p>
       </div>
-    </footer>
+    </footer></div>
   );
 };
 

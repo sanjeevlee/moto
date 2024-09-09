@@ -10,6 +10,7 @@ import SignIn from './Signin';
 import Signup from './Signup';
 import AboutUs from './Aboutus';
 import Service from './Service';
+import Contact from './Contact';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,7 +22,7 @@ root.render(
         <Route path="/signup" element={<Signup />} />
         <Route path="/Aboutus" element={<AboutUs />} />
         <Route path="/Service" element={<Service/>} />
-
+        <Route path="/Contact" element={<Contact/>} />
         
       </Routes>
     </BrowserRouter>

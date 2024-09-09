@@ -1,27 +1,29 @@
-import './App.css';
 import Project from './moto';
-import './Signup.css';
-import Signup from './Signup';
-import SignIn from './Signin';
-// import'./reg.css';
-import RegisterForm from './regform';
+import './App.css';
 import AboutUs from './Aboutus';
-import  Footer from './Footer';
 import Service from './Service';
-import Nbarone  from './Navbar';
+import Contact from './Contact';
+import SignIn from './Signin';
+import Signup from './Signup';
+import './Signup.css';
+import  Footer from './Footer';
 import './Navbar.css';
+import Navbr from './Navbar';
+import RegisterForm from './regform';
+// import'./reg.css';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
      <Project/>
+     {/* <AboutUs/> */}
+     {/* <Service/> */}
+     {/* <Contact/> */}
      {/* <Signup/> */}
      {/* <SignIn/> */}
-     {/* <RegisterForm/> */}
-     {/* <AboutUs/> */}
      {/* < Footer/> */}
-     {/* <Service/> */}
-     {/* <Nbarone/> */}
+    {/* <Navbr/> */}
+     {/* <RegisterForm/> */}
       </header>
     </div>
   );
