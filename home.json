@@ -16,7 +16,7 @@
     {
       "id": 3,
       "label": "BLOG",
-      "url": "/blog",
+      "url": "/Blog",
       "icon": "BsChevronRight"
     },
     {
@@ -88,6 +88,52 @@
       "name": "Thin Meat",
       "image": "./images/image5.png.jpg",
       "description": "more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing"
+    }
+  ]
+},
+"Blog":{
+  "burger":[
+    {
+      "image": "./images/burger.png.png",
+      "title": "Burger House",
+      "date":"Monday - Saturday",
+      "hours": "  09:00 - 18:00",
+      "description": "looking at its layout. The point of using Lorem Ipsum is that it has alooking at its layout. The point of using Lorem Ipsum is that it has a."
+    },
+    {
+      "image": "./images/img-8.png",
+      "title": "Burger House",
+      "date":"Monday - Saturday",
+      "hours": " 09:00 - 18:00",
+      "description": "looking at its layout. The point of using Lorem Ipsum is that it has alooking at its layout. The point of using Lorem Ipsum is that it has a"
+    },
+    {
+      "image": "./images/Burger3.png.png",
+      "title": "Burger House",
+      "date":"Monday - Saturday",
+      "hours": " 09:00 - 18:00",
+      "description": "looking at its layout. The point of using Lorem Ipsum is that it has alooking at its layout. The point of using Lorem Ipsum is that it has a"
+    },
+    {
+      "image": "./images/fries.png.png",
+      "title": "Burger House",
+      "date":"Monday - Saturday",
+      "hours": "09:00 - 18:00",
+      "description": "looking at its layout. The point of using Lorem Ipsum is that it has alooking at its layout. The point of using Lorem Ipsum is that it has a"
+    },
+    {
+      "image": "./images/saled.png.png",
+      "title": "Burger House",
+      "date":"Monday - Saturday",
+      "hours": "09:00 - 18:00",
+      "description": "looking at its layout. The point of using Lorem Ipsum is that it has alooking at its layout. The point of using Lorem Ipsum is that it has a"
+    },
+    {
+      "image": "./images/csaled.png.png",
+      "title": "Burger House",
+      "date":"Monday - Saturday",
+      "hours": "09:00 - 18:00",
+      "description": "looking at its layout. The point of using Lorem Ipsum is that it has alooking at its layout. The point of using Lorem Ipsum is that it has a."
     }
   ]
 }

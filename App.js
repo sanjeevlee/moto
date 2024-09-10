@@ -10,6 +10,9 @@ import  Footer from './Footer';
 import './Navbar.css';
 import Navbr from './Navbar';
 import RegisterForm from './regform';
+import Blog from './Blog';
+import TestimonialCarousel from './Carosal';
+
 // import'./reg.css';
 function App() {
   return (
@@ -23,6 +26,8 @@ function App() {
      {/* <SignIn/> */}
      {/* < Footer/> */}
     {/* <Navbr/> */}
+    {/* <Blog/> */}
+   {/* <TestimonialCarousel/> */}
      {/* <RegisterForm/> */}
       </header>
     </div>

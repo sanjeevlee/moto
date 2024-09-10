@@ -135,7 +135,7 @@ const SignIn = () => {
         <Col md={8} lg={5}>
           <Card className="p-4 shadow-sm animate__animated animate__slideInLeft">
             <Card.Body>
-              <div className="title">WELCOME TO  <a href="/" className="text-4xl font-extrabold text-[#e42e0c]">MOTO</a></div>
+              <div className="titles">WELCOME TO  <a href="/" className="text-4xl font-extrabold text-[#e42e0c]">MOTO</a></div>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="formEmail" className="mb-3">
                   <Form.Label>E-Mail</Form.Label>

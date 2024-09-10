@@ -4,6 +4,8 @@ import { Navbar, Nav, Offcanvas } from 'react-bootstrap';
 import jsonData from './home.json';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Row, Col, Container, Card, Button } from 'react-bootstrap';
+import Carousel from 'react-bootstrap/Carousel';
+import Footer from './Footer';
 
 const Project = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -154,7 +156,7 @@ const Project = () => {
               ))}
             </Row>
 
-            <Row>
+            <Row className='ba'>
               {jsonData.foods.foods.map((food, index) => (
                 <Col key={index} xs={12} sm={6} md={6} lg={3} className="mb-4 cards">
                   <Card className="h-100">
@@ -163,7 +165,7 @@ const Project = () => {
                       <Card.Title>{food.name}</Card.Title>
                       <Card.Text className="text">{food.description}</Card.Text>
                       <div className="readmore">
-                        <a href="#">Read More</a>
+                        <a href="/Service">Read More</a>
                       </div>
                     </Card.Body>
                   </Card>
@@ -186,10 +188,82 @@ const Project = () => {
             look like readable English.Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
             </p>
             <button className="readmore1">
-              <a href="#">Read More</a>
+              <a href="/Aboutus">Read More</a>
             </button>
           </div>
         </div>
+        {/* blog */}
+        <div className="blog-container">
+  <h1 className='title'>CAFES & RESTAURANTS</h1>
+  <p class="blog_text"> search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+    <div className="restaurants-grid">
+    {jsonData.Blog.burger.slice(0, 6).map((blog, index) => (
+      <div className="restaurant-card" key={index}>
+        <img src={blog.image} alt={blog.title} />
+        <h4 className='btext'>{blog.title}</h4>
+        <h6 className='dtext'>{blog.date}</h6>
+        <h6 className='htext'>{blog.hours}</h6>
+        <p className='ltext'>{blog.description}</p>
+      </div>
+    ))}
+  </div>
+  <div class="seemore_bt"><a href="/Blog">See More</a></div>
+</div>
+{/* carosal */}
+<div className="testimonial-container">
+        <h6 class="testimonial_taital">Testimonial</h6>
+      <h2 className="testimonial-title">WHY OUR CLIENTS CHOOSE US</h2>
+      <Carousel indicators={true} controls={false} interval={1000}>
+        {/* Slide 1 */}
+        <Carousel.Item>
+          <div className="testimonial-slide">
+            <img
+              className="d-block testimonial-image"
+              src=".\images\client-img.png"
+              alt="Henrry Jo"
+            />
+            <div className="client_box">
+            <h3 className="testimonial-name">Henrry Jo</h3>
+            <p className="testimonial-subtitle">(long established)</p>
+            <p className="testimonial-text">
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look
+            </p></div>
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="testimonial-slide">
+            <img
+              className="d-block testimonial-image"
+              src=".\images\client-img.png"
+              alt="Henrry Jo"
+            />
+            <div className="client_box">
+            <h3 className="testimonial-name">Henrry Jo</h3>
+            <p className="testimonial-subtitle">(long established)</p>
+            <p className="testimonial-text">
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look
+            </p></div>
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="testimonial-slide">
+            <img
+              className="d-block testimonial-image"
+              src=".\images\client-img.png"
+              alt="Henrry Jo"
+            />
+            <div className="client_box">
+            <h3 className="testimonial-name">Henrry Jo</h3>
+            <p className="testimonial-subtitle">(long established)</p>
+            <p className="testimonial-text">
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look
+            </p></div>
+          </div>
+        </Carousel.Item>
+      
+      </Carousel>
+    </div>
+    <Footer/>
       </div>
     </>
   );

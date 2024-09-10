@@ -11,6 +11,7 @@ import Signup from './Signup';
 import AboutUs from './Aboutus';
 import Service from './Service';
 import Contact from './Contact';
+import Blog from './Blog';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
         <Route path="/Aboutus" element={<AboutUs />} />
         <Route path="/Service" element={<Service/>} />
         <Route path="/Contact" element={<Contact/>} />
+        <Route path="/Blog" element={<Blog/>} />
         
       </Routes>
     </BrowserRouter>
