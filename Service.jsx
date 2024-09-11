@@ -62,9 +62,7 @@ return (
                     <Card.Body className="d-flex flex-column cardbody">
                       <Card.Title>{food.name}</Card.Title>
                       <Card.Text className="text">{food.description}</Card.Text>
-                      <div className="readmore">
-                        <a href="#">Read More</a>
-                      </div>
+                    
                     </Card.Body>
                   </Card>
                 </Col>

@@ -44,9 +44,7 @@ const AboutUs = () => {
             editors now use Lorem Ipsum as their default model text, and a search for Content here, content here', making it 
             look like readable English.Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
           </p>
-          <div className="More_btn">
-                <a href="#">Read More</a>
-              </div>
+         
         </div>
       </div>
 

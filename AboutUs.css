@@ -193,6 +193,7 @@
   @media (max-width: 480px) {
     .about-container {
          display:table;
+         margin-top: -65px;
              }
    .text-container h2{
              margin-top: 40px;
@@ -208,6 +209,7 @@
   
     .readmore1 {
         width: 55%;
+        margin-bottom: 30px;
      
     }
     .custom-offcanvas .offcanvas-body,

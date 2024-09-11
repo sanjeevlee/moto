@@ -55,24 +55,25 @@ const Project = () => {
                 </Button>
 
                 <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="ml-auto">
-                    {navbarItemList.map((item) => (
-                      <React.Fragment key={item.id}>
-                        <Link
-                          to={item.url}
-                          className={`text-lg px-2 font-bold text-[rgb(40_40_39)] hover:text-[rgb(228_46_12)] navb ${
-                            location.pathname === item.url ? 'text-red-500' : ''
-                          }`}
-                        >
-                          {item.label}
-                        </Link>
-                        {item.label === 'SIGN IN' && (
-                          <span className="text-lg text-[rgb(40_40_39)]">|</span>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </Nav>
-                </Navbar.Collapse>
+  <Nav className="ml-auto">
+    {navbarItemList.map((item, index) => (
+      <React.Fragment key={item.id}>
+        <Link
+          to={item.url}
+          className={`text-lg px-2 font-bold text-[rgb(40_40_39)] hover:text-[rgb(228_46_12)] navb ${
+            location.pathname === item.url ? 'text-red-500' : ''
+          } ${item.label === 'CONTACT' ? 'mr-[15px]' : ''}`}
+        >
+          {item.label}
+        </Link>
+        {item.label === 'SIGN IN' && (
+          <span className="text-lg text-[rgb(40_40_39)]">|</span>
+        )}
+      </React.Fragment>
+    ))}
+  </Nav>
+</Navbar.Collapse>
+
               </Container>
             </Navbar>
 
