@@ -12,6 +12,11 @@ import AboutUs from './Aboutus';
 import Service from './Service';
 import Contact from './Contact';
 import Blog from './Blog';
+import LoginPage from './Admin';
+
+import Dashboard from './Dashboard';  
+import Addusers from './Adduser';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,7 +30,11 @@ root.render(
         <Route path="/Service" element={<Service/>} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Blog" element={<Blog/>} />
-        
+        <Route path="/LoginPage" element={<LoginPage/>} />
+        <Route path="/Addusers" element={<Addusers/>} />
+
+
+        <Route path="/admin/*" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

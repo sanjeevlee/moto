@@ -193,7 +193,7 @@
   @media (max-width: 480px) {
     .about-container {
          display:table;
-         margin-top: -65px;
+         margin-top: -65px; 
              }
    .text-container h2{
              margin-top: 40px;

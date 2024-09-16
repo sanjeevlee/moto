@@ -7,18 +7,21 @@ import SignIn from './Signin';
 import Signup from './Signup';
 import './Signup.css';
 import  Footer from './Footer';
-import './Navbar.css';
+// import './Navbar.css';
 import Navbr from './Navbar';
-import RegisterForm from './regform';
+
 import Blog from './Blog';
 import TestimonialCarousel from './Carosal';
+import LoginPage from './Admin';
+import Dashboard from './Dashboard';
+import Addusers from './Adduser';
 
-// import'./reg.css';
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-     <Project/>
+     {/* <Project/>  */}
      {/* <AboutUs/> */}
      {/* <Service/> */}
      {/* <Contact/> */}
@@ -29,6 +32,9 @@ function App() {
     {/* <Blog/> */}
    {/* <TestimonialCarousel/> */}
      {/* <RegisterForm/> */}
+     {/* <LoginPage/> */}
+     <Dashboard />
+     {/* <Addusers/> */}
       </header>
     </div>
   );
