@@ -13,15 +13,17 @@ import Service from './Service';
 import Contact from './Contact';
 import Blog from './Blog';
 import LoginPage from './Admin';
-
-import Dashboard from './Dashboard';  
+import Dashboard from './Dashboard';
+// import LoginPage from './LoginPage';
+import { AuthProvider } from './AuthContext';
+import ProtectedRoute from './ProtectedRoute';
 import Addusers from './Adduser';
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <AuthProvider>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/signin" element={<SignIn />} />
@@ -35,7 +37,19 @@ root.render(
 
 
         <Route path="/admin/*" element={<Dashboard />} />
+        <Route path="/login" element={<LoginPage />} />
+       
+{/* Protected Admin Route */}
+<Route 
+  path="/admin/*" 
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  } 
+/>
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,5 +1,5 @@
 import Project from './moto';
-import './App.css';
+// import './App.css';
 import AboutUs from './Aboutus';
 import Service from './Service';
 import Contact from './Contact';
@@ -32,8 +32,8 @@ function App() {
     {/* <Blog/> */}
    {/* <TestimonialCarousel/> */}
      {/* <RegisterForm/> */}
-     {/* <LoginPage/> */}
-     <Dashboard />
+     <LoginPage/>
+     {/* <Dashboard /> */}
      {/* <Addusers/> */}
       </header>
     </div>

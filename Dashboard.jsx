@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Navbar, Nav, Button, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate, Link, Route, Routes } from 'react-router-dom';
 import { FaBars, FaChevronRight } from 'react-icons/fa';
+import { useAuth } from './AuthContext';
 import './Dashboard.css';
 import Addusers from './Adduser';
 
@@ -73,10 +74,12 @@ const Review = () => <h2 className="p-5">Review Section</h2>;
 const Settings = () => <h2 className="p-5">Settings Section</h2>;
 
 const AdminPanel = () => {
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate('/LoginPage'); // Redirect to login page
+    logout(); // Log the user out
+    navigate('/login'); // Redirect to login page
   };
 
   return (
@@ -89,7 +92,7 @@ const AdminPanel = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="#" style={{ color: '#f8f9fc' }}>Demo User</Nav.Link>
-            <Button onClick={handleLogout} className="ms-3 custom-logout-btn"> Logout</Button>
+            <Button onClick={handleLogout} className="ms-3 custom-logout-btn">Logout</Button>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

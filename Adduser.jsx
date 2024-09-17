@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Addusers() {
   const [users, setUsers] = useState([
-    { id: 1, firstName: "Genevieve", lastName: "Blind", dob: "1/24/1996", country: "Afghanistan", phone: "2268978063", age: 82 },
-    { id: 2, firstName: "Caroline", lastName: "Haddock", dob: "12/5/1989", country: "Afghanistan", phone: "8251841635", age: 52 },
+    // { id: 1, firstName: "Genevieve", lastName: "Blind", dob: "1/24/1996", country: "Afghanistan", phone: "2268978063", age: 82 },
+    // { id: 2, firstName: "Caroline", lastName: "Haddock", dob: "12/5/1989", country: "Afghanistan", phone: "8251841635", age: 52 },
     // Add more user data here
   ]);
 
@@ -69,12 +69,10 @@ function Addusers() {
         <thead>
           <tr>
             <th onClick={() => sortTable("id")}>ID</th>
-            <th onClick={() => sortTable("firstName")}>First Name</th>
-            <th onClick={() => sortTable("lastName")}>Last Name</th>
-            <th onClick={() => sortTable("dob")}>Date of Birth</th>
-            <th onClick={() => sortTable("country")}>Country</th>
-            <th onClick={() => sortTable("phone")}>Phone</th>
-            <th onClick={() => sortTable("age")}>Age</th>
+            <th onClick={() => sortTable("Name")}>Name</th>
+            <th onClick={() => sortTable("Phone Number")}>PhoneNumber</th>
+            <th onClick={() => sortTable("Email")}>Email</th>
+            <th onClick={() => sortTable("Password")}>Password</th>
             <th>Actions</th>
           </tr>
         </thead>
