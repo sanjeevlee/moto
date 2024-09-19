@@ -1,50 +1,42 @@
-
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';  // Importing the eye icons
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Signup = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const onSubmit = async (data) => {
+    console.log(data);
+    
     try {
-      const response = await fetch('http://localhost:1425/api/users', {
+      const response = await fetch('http://localhost:2536/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok'+JSON.stringify(response));
       }
 
       const result = await response.json();
       console.log('Success:', result);
-      // Handle success (e.g., redirect, show a success message, etc.)
+      alert('User registered successfully');
     } catch (error) {
       console.error('Error:', error);
-      // Handle error (e.g., show an error message)
     }
   };
 
   return (
-    <Container fluid className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#fff' }}>
+    <Container fluid className="d-flex justify-content-center align-items-center vh-100">
       <Row className="w-100 justify-content-center">
         <Col md={8} lg={5}>
-          <Card className="p-4 shadow-smanimate__animated animate__slideInLeft"
-            onAnimationEnd={() => {
-              document.body.style.overflow = 'auto';
-            }}
-          >
+          <Card className="p-4 shadow">
             <Card.Body>
               <div className="title">WELCOME TO <a href="/" className="text-4xl font-extrabold text-[#e42e0c]">MOTO</a></div>
               
@@ -151,6 +143,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-
-

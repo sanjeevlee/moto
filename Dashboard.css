@@ -27,11 +27,31 @@
   background-color:#f8f9fc ;
   color: #343a40; 
 }
+.nav-link {
+  color: #f8f9fc;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #e42e0c; /* Change this to the desired hover color */
+}
 
 .custom-logout-btn:hover {
   border-color: #f8f9fc;
   background-color: #e42e0c; /* Change background color on hover */
   color: #f8f9fc; /* Change text color on hover for contrast */
+}
+.custom-dropdown-toggle {
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.custom-dropdown-toggle:hover {
+  border-color: #f8f9fc;
+  background-color: #e42e0c;
+  color: #f8f9fc;
 }
 
 .arrow-icon {

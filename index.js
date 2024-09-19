@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Project from './Project';
 import SignIn from './Signin';
 import Signup from './Signup';
 import AboutUs from './Aboutus';
@@ -26,6 +27,7 @@ root.render(
     <AuthProvider>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/project" element={<Project />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/Aboutus" element={<AboutUs />} />

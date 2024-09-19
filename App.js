@@ -1,4 +1,4 @@
-import Project from './moto';
+import Project from './Project';
 // import './App.css';
 import AboutUs from './Aboutus';
 import Service from './Service';
@@ -32,8 +32,8 @@ function App() {
     {/* <Blog/> */}
    {/* <TestimonialCarousel/> */}
      {/* <RegisterForm/> */}
-     <LoginPage/>
-     {/* <Dashboard /> */}
+     {/* <LoginPage/> */}
+     <Dashboard />
      {/* <Addusers/> */}
       </header>
     </div>
