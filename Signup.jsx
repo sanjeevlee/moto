@@ -11,7 +11,7 @@ const Signup = () => {
     console.log(data);
     
     try {
-      const response = await fetch('http://localhost:2536/api/users', {
+      const response = await fetch('http://localhost:5000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,6 +20,8 @@ const Signup = () => {
 
       });
 
+    console.log(JSON.stringify(response));
+    
       if (!response.ok) {
         throw new Error('Network response was not ok'+JSON.stringify(response));
       }
@@ -46,17 +48,17 @@ const Signup = () => {
                   <Form.Control
                     type="text"
                     placeholder="Your name"
-                    {...register('username', {
+                    {...register('name', {
                       required: 'Name is required',
                       minLength: {
                         value: 3,
                         message: 'Name must be at least 3 characters long',
                       },
                     })}
-                    isInvalid={!!errors.username}
+                    isInvalid={!!errors.name}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {errors.username && errors.username.message}
+                    {errors.name && errors.name.message}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -65,17 +67,17 @@ const Signup = () => {
                   <Form.Control
                     type="text"
                     placeholder="Phone number"
-                    {...register('Number', {
+                    {...register('phone', {
                       required: 'Number is required',
                       pattern: {
                         value: /^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/,
                         message: 'Enter a valid Phone Number',
                       },
                     })}
-                    isInvalid={!!errors.Number}
+                    isInvalid={!!errors.phone}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {errors.Number && errors.Number.message}
+                    {errors.phone && errors.phone.message}
                   </Form.Control.Feedback>
                 </Form.Group>
 

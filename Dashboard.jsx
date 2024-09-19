@@ -70,79 +70,110 @@ const Dashboard = () => {
 
 // Users Component
 const Users = ({ users, setUsers }) => {
-  const handleDelete = (id)=> {
-    const updatedUsers = users.filter(user => user.id !== id);
-    setUsers(updatedUsers);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/users/${id}`);
+      const updatedUsers = users.filter(user => user._id !== id);
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.error("Error deleting user:", error.response?.data || error.message);
+    }
   };
-
   return (
     <Container className="p-5">
-      <Row>
-        <Col md={12}>
-          <h2>Users Section</h2>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Password</th>
-                <th>Confirm Password</th>
-                <th>Actions</th>
+    <Row>
+      <Col md={12}>
+        <h2>Users Section</h2>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Password</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr key={user._id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.phone}</td>
+                <td>{user.password}</td>
+                <td>
+                <Button variant="primary" as={Link} to={`/admin/users/edit/${user._id}`}>Edit</Button>
+                  <Button variant="danger" onClick={() => handleDelete(user._id)}>Delete</Button>
+                  <Button variant="info" as={Link} to={`/admin/users/view/${user._id}`}>View</Button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {users.map(user => (
-                <tr key={user.id}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.password}</td>
-                  <td>{user.confirmPassword}</td>
-                  <td>
-                    <Button variant="primary" as={Link} to={`/admin/users/edit/${user.id}`}>Edit</Button>{' '}
-                    <Button variant="danger" onClick={() => handleDelete(user.id)}>Delete</Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
-    </Container>
+            ))}
+          </tbody>
+        </Table>
+      </Col>
+    </Row>
+  </Container>
   );
 };
 
-// EditUser Component
-const EditUser = ({ users, setUsers }) => {
-  const { id } = useParams();
+const EditUser = ({ users, setUsers, viewMode = false }) => {
+  const { id } = useParams(); // Get the ID from the URL
   const navigate = useNavigate();
-  const [user, setUser] = useState({ name: '', email: '', phone: '', password: '', confirmPassword: '' });
+  const [user, setUser] = useState({ name: '', email: '', phone: '', password: '' });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Fetch user data when editing
   useEffect(() => {
-    if (id)
- {
-      const existingUser = users.find(user => user.id === parseInt(id));
-      if (existingUser) {
-        setUser(existingUser);
-      }
-    }
-  }, [id, users]);
+    if (id) {
+      const fetchUser = async () => {
+        try {
+          const response = await axios.put(`http://localhost:5000/api/users/${id}`, user);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (id)
- {
-      // Edit existing user
-      const updatedUsers = users.map(u => (u.id === parseInt(id)
- ? user : u));
-      setUsers(updatedUsers);
+          setUser(response.data); // Set user data in state
+        } catch (error) {
+          console.error("Error fetching user:", error.response?.data || error.message);
+          setError("Failed to load user data. Please try again.");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchUser();
     } else {
-      // Add new user
-      setUsers([...users, { ...user, id: users.length + 1 }]);
+      setIsLoading(false); // Stop loading if adding a new user
     }
-    navigate('/admin/users/manage');
+  }, [id]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (viewMode) return;
+    try {
+      if (id) {
+        const response = await axios.put(`http://localhost:5000/api/users/${id}`, user); // Corrected to PUT
+        const updatedUsers = users.map(u => (u._id === id ? response.data : u));
+        setUsers(updatedUsers); // Update the user list
+      } else {
+        const response = await axios.post('http://localhost:5000/api/users', user);
+        setUsers([response.data, ...users]); // Add new user to the list
+      }
+      navigate('/admin/users/manage'); // Navigate back to manage users
+    } catch (error) {
+      console.error("Error saving user:", error.response?.data || error.message);
+      setError("Failed to save user data. Please try again.");
+    }
   };
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <Container className="p-5">
@@ -151,46 +182,52 @@ const EditUser = ({ users, setUsers }) => {
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
-            type="text"
-            value={user.name}
-            onChange={(e) => setUser({ ...user, name: e.target.value })}
-          />
+        type="text"
+           name="name"
+  value={user.name}
+  onChange={handleChange}
+  required
+  disabled={viewMode}
+/>
         </Form.Group>
         <Form.Group>
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
+            name="email"
             value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            onChange={handleChange}
+            required
+                   disabled={viewMode}
           />
         </Form.Group>
         <Form.Group>
           <Form.Label>Phone</Form.Label>
           <Form.Control
             type="text"
+            name="phone"
             value={user.phone}
-            onChange={(e) => setUser({ ...user, phone: e.target.value })}
+            onChange={handleChange}
+           required
+            disabled={viewMode}
           />
         </Form.Group>
         <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
+            name="password"
             value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            onChange={handleChange}
+           required
+            disabled={viewMode}
           />
         </Form.Group>
-        <Form.Group>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={user.confirmPassword}
-            onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
-          />
-        </Form.Group>
-        <Button variant="secondary" type="submit" className="mt-3">
-          {id ? 'Update User' : 'Add User'}
-        </Button>
+        {!viewMode && (
+          <Button variant="secondary" type="submit" className="mt-3">
+            {id ? 'Update User' : 'Add User'}
+          </Button>
+        )}
       </Form>
     </Container>
   );
@@ -198,11 +235,13 @@ const EditUser = ({ users, setUsers }) => {
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
+  // Fetch users on mount
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:1425/api/users');
+        const response = await axios.get('http://localhost:5000/api/allusers');
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error.response?.data || error.message);
@@ -211,17 +250,8 @@ const AdminPanel = () => {
     fetchUsers();
   }, []);
 
-  const navigate = useNavigate();
-
   const handleLogout = () =>{
-    // Remove token from local storage or session storage
-    localStorage.removeItem('auth_token'); // Or sessionStorage.removeItem('auth_token');
-    
-    // Optionally, clear any user-specific data from state/context
-    // You can do something like setUser(null) if you're using context
-  
-    // Redirect the user to the login page
-    navigate('/login');
+     navigate('/login');
   };
   const handleShopRedirect = () => {
     // Redirect to the home page
@@ -257,7 +287,7 @@ const AdminPanel = () => {
           </Dropdown>
         </Nav>
       </Navbar.Collapse>
-    </Navbar>
+    </Navbar>  
     <Row>
       <Col md={2} className="sidebar">
         <Nav className="flex-column">
@@ -316,6 +346,8 @@ const AdminPanel = () => {
             <Route path="/instructors" element={<h2 className="p-5">Instructors Section</h2>} />
             <Route path="/reports" element={<h2 className="p-5">Reports Section</h2>} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/users/view/:id" element={<EditUser users={users} setUsers={setUsers} viewMode={true} />} />
+
             {/* <Route path="/login" element={<Login />} /> Ensure you have a Login component */}
           </Routes>
         </Col>
