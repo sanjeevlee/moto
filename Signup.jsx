@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const Signup = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate();  // Initialize navigate
 
   const onSubmit = async (data) => {
     console.log(data);
-    
+
     try {
       const response = await fetch('http://localhost:5000/api/users', {
         method: 'POST',
@@ -17,18 +19,19 @@ const Signup = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-
       });
 
-    console.log(JSON.stringify(response));
-    
       if (!response.ok) {
-        throw new Error('Network response was not ok'+JSON.stringify(response));
+        throw new Error('Network response was not ok ' + JSON.stringify(response));
       }
 
       const result = await response.json();
       console.log('Success:', result);
       alert('User registered successfully');
+
+      
+      navigate('/project'); 
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -41,7 +44,7 @@ const Signup = () => {
           <Card className="p-4 shadow">
             <Card.Body>
               <div className="title">WELCOME TO <a href="/" className="text-4xl font-extrabold text-[#e42e0c]">MOTO</a></div>
-              
+
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="formUsername" className="mb-3">
                   <Form.Label>Name</Form.Label>

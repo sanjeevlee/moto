@@ -2,7 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Navbar, Nav, Button, Row, Col, Card, Table, Form, Dropdown } from 'react-bootstrap';
 import { useNavigate, Link, Route, Routes, useParams } from 'react-router-dom';
-import { FaBars, FaChevronRight, FaUser } from 'react-icons/fa';
+import { FaBars, FaChevronRight, FaUser ,FaRegEye , FaEdit } from 'react-icons/fa';
+import { MdDelete } from "react-icons/md";
+import { GoArrowRight , GoArrowLeft } from "react-icons/go";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { useAuth } from './AuthContext';
 import './Dashboard.css';
 import Addusers from './Adduser';
@@ -68,98 +71,290 @@ const Dashboard = () => {
   );
 };
 
-// Users Component
 const Users = ({ users, setUsers }) => {
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`);
-      const updatedUsers = users.filter(user => user._id !== id);
-      setUsers(updatedUsers);
-    } catch (error) {
-      console.error("Error deleting user:", error.response?.data || error.message);
+  const [selectedUsers, setSelectedUsers] = useState([]); // State to track selected users
+  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const [currentPage, setCurrentPage] = useState(1); // State for current page
+  const usersPerPage = 5; // Number of users per page
+
+  // Filter users based on search term
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.phone?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Calculate pagination details
+  const totalUsers = filteredUsers.length;
+  const totalPages = Math.ceil(totalUsers / usersPerPage);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Handle individual checkbox change
+  const handleCheckboxChange = (id) => {
+    setSelectedUsers((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((userId) => userId !== id) // Deselect
+        : [...prevSelected, id] // Select
+    );
+  };
+
+  // Handle master checkbox change
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      setSelectedUsers(currentUsers.map((user) => user._id)); // Select all users on current page
+    } else {
+      setSelectedUsers([]); // Deselect all users
     }
   };
+
+  // Handle delete button for selected users
+  const handleDeleteSelected = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete the selected users?"
+    );
+    if (!confirmed) return; // Exit if the user cancels
+
+    try {
+      await Promise.all(
+        selectedUsers.map((id) => axios.delete(`http://localhost:5000/api/users/${id}`))
+      );
+      const updatedUsers = users.filter((user) => !selectedUsers.includes(user._id));
+      setUsers(updatedUsers);
+      setSelectedUsers([]); // Clear selected users after deletion
+
+      // Adjust current page if necessary
+      if (currentPage > Math.ceil(updatedUsers.length / usersPerPage)) {
+        setCurrentPage(Math.max(currentPage - 1, 1));
+      }
+    } catch (error) {
+      console.error("Error deleting users:", error.response?.data || error.message);
+      alert("Failed to delete selected users. Please try again.");
+    }
+  };
+
+  // Handle individual delete
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm("Are you sure you want to delete this user?");
+    if (!confirmed) return;
+
+    try {
+      await axios.delete(`http://localhost:5000/api/users/${id}`);
+      const updatedUsers = users.filter((user) => user._id !== id);
+      setUsers(updatedUsers);
+
+      // Adjust current page if necessary
+      if (currentPage > Math.ceil(updatedUsers.length / usersPerPage)) {
+        setCurrentPage(Math.max(currentPage - 1, 1));
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error.response?.data || error.message);
+      alert("Failed to delete user. Please try again.");
+    }
+  };
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page on search
+  };
+
+  // Handle page change
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <Container className="p-5">
-    <Row>
-      <Col md={12}>
-        <h2>Users Section</h2>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone Number</th>
-              <th>Password</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map(user => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.password}</td>
-                <td>
-                <Button variant="primary" as={Link} to={`/admin/users/edit/${user._id}`}>Edit</Button>
-                  <Button variant="danger" onClick={() => handleDelete(user._id)}>Delete</Button>
-                  <Button variant="info" as={Link} to={`/admin/users/view/${user._id}`}>View</Button>
-                </td>
+      <Row className="mb-3">
+        <Col md={6}>
+          <h2>Users Section</h2>
+        </Col>
+        <Col md={6} className="d-flex justify-content-end">
+          <Button
+            variant="danger"
+            onClick={handleDeleteSelected}
+            disabled={selectedUsers.length === 0} // Disable if no users are selected
+          >
+            <RiDeleteBin6Line />
+          </Button>
+        </Col>
+      </Row>
+
+      <Row className="mb-3">
+        <Col md={12}>
+          {/* Search Box */}
+          <Form.Control
+            type="text"
+            placeholder="Search by name, email, or phone"
+            value={searchTerm}
+            onChange={handleSearchChange} // Update search term on change
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={12}>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>
+                  <Form.Check
+                    type="checkbox"
+                    onChange={handleSelectAll}
+                    checked={
+                      currentUsers.length > 0 &&
+                      selectedUsers.length === currentUsers.length
+                    } // Select all if all users on current page are selected
+                  />
+                </th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Col>
-    </Row>
-  </Container>
+            </thead>
+            <tbody>
+              {currentUsers.length > 0 ? (
+                currentUsers.map((user) => (
+                  <tr key={user._id}>
+                    <td>
+                      <Form.Check
+                        type="checkbox"
+                        checked={selectedUsers.includes(user._id)} // Check if the user is selected
+                        onChange={() => handleCheckboxChange(user._id)}
+                      />
+                    </td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>
+                      <Button
+                        variant="info"
+                        as={Link}
+                        to={`/admin/users/view/${user._id}`}
+                      >
+                        <FaRegEye />
+                      </Button>{' '}
+                      <Button
+                        variant="primary"
+                        as={Link}
+                        to={`/admin/users/edit/${user._id}`}
+                      >
+                        <FaEdit />
+                      </Button>{' '}
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelete(user._id)}
+                      >
+                        <MdDelete />
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    No users found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+
+      {/* Pagination Section */}
+      {totalUsers > usersPerPage && (
+        <Row className="align-items-center">
+          <Col md={6}>
+            <p>
+              Showing {Math.min(indexOfFirstUser + 1, totalUsers)} to{' '}
+              {Math.min(indexOfLastUser, totalUsers)} of {totalUsers} users
+            </p>
+          </Col>
+          <Col md={6} className="d-flex justify-content-end">
+            <Button
+              variant="secondary"
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              className="me-2"
+            >
+              <GoArrowLeft />
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+             <GoArrowRight />
+            </Button>
+          </Col>
+        </Row>
+      )}
+    </Container>
   );
 };
-
+// EditUser Component
 const EditUser = ({ users, setUsers, viewMode = false }) => {
   const { id } = useParams(); // Get the ID from the URL
   const navigate = useNavigate();
   const [user, setUser] = useState({ name: '', email: '', phone: '', password: '' });
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // State to track loading
+  const [error, setError] = useState(null); // State to track errors
 
-  // Fetch user data when editing
+  // Fetch the user data when the component is mounted
   useEffect(() => {
     if (id) {
       const fetchUser = async () => {
         try {
-          const response = await axios.put(`http://localhost:5000/api/users/${id}`, user);
-
-          setUser(response.data); // Set user data in state
+          const response = await axios.get(`http://localhost:5000/api/users/${id}`);
+          if (response.data) {
+            console.log("User data fetched:", response.data); // Debugging
+            setUser(response.data); // Set the user data in the state
+          } else {
+            setError("User not found");
+          }
         } catch (error) {
           console.error("Error fetching user:", error.response?.data || error.message);
           setError("Failed to load user data. Please try again.");
         } finally {
-          setIsLoading(false);
+          setIsLoading(false); // Stop the loading state
         }
       };
       fetchUser();
     } else {
-      setIsLoading(false); // Stop loading if adding a new user
+      setIsLoading(false); // If no ID, we're adding a new user
     }
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (viewMode) return;
+    if (viewMode) return; // Prevent submission in view mode
     try {
-      if (id) {
-        const response = await axios.put(`http://localhost:5000/api/users/${id}`, user); // Corrected to PUT
+      if (id)
+ {
+        const response = await axios.put(`http://localhost:5000/api/users/${id}`, user);
         const updatedUsers = users.map(u => (u._id === id ? response.data : u));
-        setUsers(updatedUsers); // Update the user list
+        setUsers(updatedUsers); // Update the user list in the parent component
       } else {
         const response = await axios.post('http://localhost:5000/api/users', user);
-        setUsers([response.data, ...users]); // Add new user to the list
+        setUsers([ ...users ,response.data ]); // Add a new user to the top of the list
       }
-      navigate('/admin/users/manage'); // Navigate back to manage users
+      navigate('/admin/users/manage'); // Navigate back to the manage users page
     } catch (error) {
       console.error("Error saving user:", error.response?.data || error.message);
-      setError("Failed to save user data. Please try again.");
+      setError("Failed to save user data. Please try again."); // Set error state
     }
   };
 
@@ -167,30 +362,36 @@ const EditUser = ({ users, setUsers, viewMode = false }) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const handleBack = () => {
+    navigate('/admin/users/manage'); // Navigate back to Manage Users
+  };
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; // Show a loading message while fetching the user data
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error}</div>; // Display any error that occurs during data fetching
   }
+
+
 
   return (
     <Container className="p-5">
-      <h2>{id ? 'Edit User' : 'Add User'}</h2>
+      <h2>{viewMode ? 'View User' : id ? 'Edit User' : 'Add User'}</h2>
       <Form onSubmit={handleSubmit}>
-        <Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
-        type="text"
-           name="name"
-  value={user.name}
-  onChange={handleChange}
-  required
-  disabled={viewMode}
-/>
+            type="text"
+            name="name"
+            value={user.name}
+            onChange={handleChange}
+            required
+            readOnly={viewMode}
+          />
         </Form.Group>
-        <Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
@@ -198,31 +399,37 @@ const EditUser = ({ users, setUsers, viewMode = false }) => {
             value={user.email}
             onChange={handleChange}
             required
-                   disabled={viewMode}
+            readOnly={viewMode}
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label>Phone</Form.Label>
           <Form.Control
             type="text"
             name="phone"
             value={user.phone}
             onChange={handleChange}
-           required
-            disabled={viewMode}
+            required
+            readOnly={viewMode}
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             name="password"
             value={user.password}
             onChange={handleChange}
-           required
-            disabled={viewMode}
+            required
+            readOnly={viewMode}
           />
         </Form.Group>
+              {/* {/ Back to Manage Users Button /} */}
+              {viewMode && (
+          <Button variant="secondary" className="mt-3" onClick={handleBack}>
+            Back to Manage Users
+          </Button>
+        )}
         {!viewMode && (
           <Button variant="secondary" type="submit" className="mt-3">
             {id ? 'Update User' : 'Add User'}
@@ -338,14 +545,11 @@ const AdminPanel = () => {
         </Col>
         <Col md={10}>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users/manage" element={<Users users={users} setUsers={setUsers} />} />
             <Route path="/users/add" element={<EditUser users={users} setUsers={setUsers} />} />
             <Route path="/users/edit/:id" element={<EditUser users={users} setUsers={setUsers} />} />
-            <Route path="/courses" element={<h2 className="p-5">Courses Section</h2>} />
-            <Route path="/instructors" element={<h2 className="p-5">Instructors Section</h2>} />
-            <Route path="/reports" element={<h2 className="p-5">Reports Section</h2>} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/users/view/:id" element={<EditUser users={users} setUsers={setUsers} viewMode={true} />} />
 
             {/* <Route path="/login" element={<Login />} /> Ensure you have a Login component */}

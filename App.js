@@ -1,5 +1,5 @@
 import Project from './Project';
-// import './App.css';
+import './App.css';
 import AboutUs from './Aboutus';
 import Service from './Service';
 import Contact from './Contact';
@@ -34,7 +34,8 @@ function App() {
      {/* <RegisterForm/> */}
      {/* <LoginPage/> */}
      <Dashboard />
-     {/* <Addusers/> */}
+     {/* <Addusers/> */}.
+     {/* <AdminPanel/> */}
       </header>
     </div>
   );
