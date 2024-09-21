@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const navigate = useNavigate();  // Initialize navigate
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -21,16 +21,16 @@ const Signup = () => {
         body: JSON.stringify(data),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Network response was not ok ' + JSON.stringify(response));
+        // Show error message if email or phone number already exists
+        alert(result.message);
+        return;
       }
 
-      const result = await response.json();
-      console.log('Success:', result);
       alert('User registered successfully');
-
-      
-      navigate('/project'); 
+      navigate('/project');  // Redirect to a different page upon success
 
     } catch (error) {
       console.error('Error:', error);
@@ -71,10 +71,10 @@ const Signup = () => {
                     type="text"
                     placeholder="Phone number"
                     {...register('phone', {
-                      required: 'Number is required',
+                      required: 'Phone number is required',
                       pattern: {
                         value: /^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/,
-                        message: 'Enter a valid Phone Number',
+                        message: 'Enter a valid phone number',
                       },
                     })}
                     isInvalid={!!errors.phone}

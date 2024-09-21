@@ -77,6 +77,9 @@ const Users = ({ users, setUsers }) => {
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const usersPerPage = 5; // Number of users per page
 
+  const sortedUsers = [...users].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+
   // Filter users based on search term
   const filteredUsers = users.filter(
     (user) =>
@@ -209,6 +212,7 @@ const Users = ({ users, setUsers }) => {
             <thead>
               <tr>
                 <th>
+                  
                   <Form.Check
                     type="checkbox"
                     onChange={handleSelectAll}
@@ -218,9 +222,11 @@ const Users = ({ users, setUsers }) => {
                     } // Select all if all users on current page are selected
                   />
                 </th>
+               
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>Password</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -238,6 +244,7 @@ const Users = ({ users, setUsers }) => {
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>
+                    <td>{user.password}</td>
                     <td>
                       <Button
                         variant="info"
@@ -342,14 +349,13 @@ const EditUser = ({ users, setUsers, viewMode = false }) => {
     e.preventDefault();
     if (viewMode) return; // Prevent submission in view mode
     try {
-      if (id)
- {
+      if (id) {
         const response = await axios.put(`http://localhost:5000/api/users/${id}`, user);
         const updatedUsers = users.map(u => (u._id === id ? response.data : u));
         setUsers(updatedUsers); // Update the user list in the parent component
       } else {
         const response = await axios.post('http://localhost:5000/api/users', user);
-        setUsers([ ...users ,response.data ]); // Add a new user to the top of the list
+        setUsers([ response.data , ...users  ]); // Add a new user to the top of the list
       }
       navigate('/admin/users/manage'); // Navigate back to the manage users page
     } catch (error) {
@@ -373,7 +379,6 @@ const EditUser = ({ users, setUsers, viewMode = false }) => {
   if (error) {
     return <div>{error}</div>; // Display any error that occurs during data fetching
   }
-
 
 
   return (
@@ -551,6 +556,7 @@ const AdminPanel = () => {
             <Route path="/users/add" element={<EditUser users={users} setUsers={setUsers} />} />
             <Route path="/users/edit/:id" element={<EditUser users={users} setUsers={setUsers} />} />
             <Route path="/users/view/:id" element={<EditUser users={users} setUsers={setUsers} viewMode={true} />} />
+            <Route path="/profile" element={<Profile />} />
 
             {/* <Route path="/login" element={<Login />} /> Ensure you have a Login component */}
           </Routes>
