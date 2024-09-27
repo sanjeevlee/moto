@@ -147,7 +147,7 @@ const Project = () => {
               Search for 'lorem ipsum' will uncover many web sites still in their infancy.
             </p>
 
-            <Row className="justify-content mb-4 foodss " >
+            <Row className="justify-content mb-4 foodss" >
               {jsonData.foods.categories.map((category, index) => (
                 <Col key={index} xs={6} sm={6} md={2} className="text-center mb-2 service">
                   <div className={`category ${category === 'Biryani & Meat' ? 'active' : ''}`}>

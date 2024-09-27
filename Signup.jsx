@@ -19,19 +19,19 @@ const Signup = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        
       });
 
       const result = await response.json();
 
       if (!response.ok) {
-        // Show error message if email or phone number already exists
+       
         alert(result.message);
         return;
       }
 
       alert('User registered successfully');
-      navigate('/project');  // Redirect to a different page upon success
-
+      navigate('/project');  
     } catch (error) {
       console.error('Error:', error);
     }

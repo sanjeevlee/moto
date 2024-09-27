@@ -13,7 +13,7 @@ const SignIn = () => {
     console.log(data);
 
     try {
-      const response = await fetch('http://localhost:5000/api/users/login', { // Assuming login endpoint
+      const response = await fetch('http://localhost:5000/api/users/login', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,18 +21,17 @@ const SignIn = () => {
         body: JSON.stringify(data),
       });
 
-      console.log(JSON.stringify(response));
+      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error('Network response was not ok ' + JSON.stringify(response));
+        
+        alert(result.message);
+        return;
       }
 
-      const result = await response.json();
-      console.log('Success:', result);
+      
       alert('Sign-in successful');
-
-      // Redirect to home page after successful sign-in
-      navigate('/project');  // Navigate to home page
+      navigate('/project');  
 
     } catch (error) {
       console.error('Error:', error);

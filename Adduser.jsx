@@ -1,507 +1,814 @@
+// import React, { useState, useEffect } from 'react';
+// import { Container, Navbar, Nav, Button, Row, Col, Card, Form, Table, Dropdown, Image } from 'react-bootstrap';
+// import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
+// import { MdSpaceDashboard } from "react-icons/md";
+// import { FaChevronRight } from "react-icons/fa";
+// import { TbReportSearch } from "react-icons/tb";
+// import { MdDelete } from "react-icons/md";
+// import { FaEye } from "react-icons/fa";
+// import { Line, Bar } from 'react-chartjs-2';
+// import axios from 'axios';
+// import moment from 'moment'; // For date formatting
+// import { FaFilePdf } from "react-icons/fa";
+// import { PiMicrosoftExcelLogoFill } from "react-icons/pi";
+// import { FaFileCsv } from "react-icons/fa6";
+// import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from 'chart.js';
+// import './Adminpannel.css'
+// import jsPDF from 'jspdf';
+// import 'jspdf-autotable';
+// import * as XLSX from 'xlsx';
 
-import React, { useState, useEffect } from 'react';
-import { Container, Navbar, Nav, Button, Row, Col, Card, Table, Form, Dropdown } from 'react-bootstrap';
-import { useNavigate, Link, Route, Routes, useParams } from 'react-router-dom';
-import { FaBars, FaChevronRight } from 'react-icons/fa';
-import './Dashboard.css';
-import axios from 'axios'; // Axios for API requests
 
-// Dashboard Component
-const Dashboard = () => {
-  return (
-    <Container fluid className="p-5">
-      <Row>
-        <Col md={3}>
-          <Card className="text-center" style={{ backgroundColor: '#00a86b', color: 'white' }}>
-            <Card.Body>
-              <Card.Title>Total Courses</Card.Title>
-              <Card.Text style={{ fontSize: '2rem' }}>25</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={3}>
-          <Card className="text-center" style={{ backgroundColor: '#00bfff', color: 'white' }}>
-            <Card.Body>
-              <Card.Title>Total Students</Card.Title>
-              <Card.Text style={{ fontSize: '2rem' }}>1,250</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={3}>
-          <Card className="text-center" style={{ backgroundColor: '#ff6347', color: 'white' }}>
-            <Card.Body>
-              <Card.Title>Assignments done</Card.Title>
-              <Card.Text style={{ fontSize: '2rem' }}>860</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={3}>
-          <Card className="text-center" style={{ backgroundColor: '#ffa500', color: 'white' }}>
-            <Card.Body>
-              <Card.Title>Active Instructors</Card.Title>
-              <Card.Text style={{ fontSize: '2rem' }}>15</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+// ChartJS.register(
+//   CategoryScale,
+//   LinearScale,
+//   BarElement,
+//   PointElement,
+//   LineElement
+// );
 
-// Users Component with Search and Pagination
-const Users = ({ users, setUsers }) => {
-  const [selectedUsers, setSelectedUsers] = useState([]); // State to track selected users
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
-  const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const usersPerPage = 5; // Number of users per page
+// // Dashboard Component
+// const Dashboard = () => {
+//   // Data for charts
+//   const lineChartData = {
+//     labels: ['April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+//     datasets: [
+//       {
+//         label: 'Sales',
+//         data: [100, 200, 400, 300, 500, 400, 600, 700, 800],
+//         fill: false,
+//         backgroundColor: '#28a745',
+//         borderColor: '#28a745',
+//       },
+//     ],
+//   };
 
-  // Filter users based on search term
-  const filteredUsers = users.filter(
-    (user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.password.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.confirmPassword.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+//   const barChartData = {
+//     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+//     datasets: [
+//       {
+//         label: 'Website Views',
+//         data: [50, 20, 30, 15, 60, 30, 45],
+//         backgroundColor: '#007bff',
+//       },
+//     ],
+//   };
 
-  // Calculate pagination details
-  const totalUsers = filteredUsers.length;
-  const totalPages = Math.ceil(totalUsers / usersPerPage);
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+//   return (
+//     <Container fluid className="p-5">
+//       <Row >
+//         <Col md={3} className='dash'>
+//           <Card className="text-center" style={{ backgroundColor: '#00a86b', color: 'white' }}>
+//             <Card.Body>
+//               <Card.Title>Total Categories</Card.Title>
+//               <Card.Text style={{ fontSize: '2rem', color: 'black' }}>1,255</Card.Text>
+//             </Card.Body>
+//           </Card>
+//         </Col>
+//         <Col md={3}>
+//           <Card className="text-center" style={{ backgroundColor: '#00bfff', color: 'white' }}>
+//             <Card.Body>
+//               <Card.Title>Total Products</Card.Title>
+//               <Card.Text style={{ fontSize: '2rem', color: 'black' }}>250</Card.Text>
+//             </Card.Body>
+//           </Card>
+//         </Col>
+//         <Col md={3}>
+//           <Card className="text-center" style={{ backgroundColor: '#ff6347', color: 'white' }}>
+//             <Card.Body>
+//               <Card.Title>Total Products Sold</Card.Title>
+//               <Card.Text style={{ fontSize: '2rem', color: 'black' }}>960</Card.Text>
+//             </Card.Body>
+//           </Card>
+//         </Col>
+//       </Row>
 
-  // Handle individual checkbox change
-  const handleCheckboxChange = (id)=> {
-    setSelectedUsers((prevSelected) =>
-      prevSelected.includes(id)
+//       {/ //fullwidth /}
+//       {/ <Card className='pro mt-5'> /}
+//       <Container className="p-4">
+//         <Row>
+//           <Col md={7}>
+//             <Card className="mb-4">
+//               <Card.Header>
+//                 <h5>Sales by Country</h5>
+//               </Card.Header>
+//               <Card.Body>
+//                 <Table responsive>
+//                   <thead>
+//                     <tr>
+//                       <th>Country</th>
+//                       <th>Sales</th>
+//                       <th>Value</th>
+//                       <th>Bounce</th>
+//                     </tr>
+//                   </thead>
+//                   <tbody>
+//                     <tr>
+//                       <td>United States</td>
+//                       <td>2500</td>
+//                       <td>$230,900</td>
+//                       <td>29.9%</td>
+//                     </tr>
+//                     <tr>
+//                       <td>Germany</td>
+//                       <td>3900</td>
+//                       <td>$440,000</td>
+//                       <td>40.22%</td>
+//                     </tr>
+//                     <tr>
+//                       <td>Great Britain</td>
+//                       <td>1400</td>
+//                       <td>$190,700</td>
+//                       <td>23.44%</td>
+//                     </tr>
+//                     <tr>
+//                       <td>Brazil</td>
+//                       <td>562</td>
+//                       <td>$143,960</td>
+//                       <td>32.14%</td>
+//                     </tr>
+//                   </tbody>
+//                 </Table>
+//               </Card.Body>
+//             </Card>
+//           </Col>
+//           <Col md={5}>
+//             {/* {/ Map Placeholder /} */}
+//             <div className="map-placeholder">
+//               {/ <h5>Map</h5> /}
+//               <Image src="./../Images/ww.jpg" className='wwimag' />
+//             </div>
+//           </Col>
+//         </Row>
+//         <Row>
+//           <Col md={4}>
+//             <Card className="mb-4">
+//               <Card.Header>Website Views</Card.Header>
+//               <Card.Body>
+//                 <Bar data={barChartData} />
+//               </Card.Body>
+//             </Card>
+//           </Col>
+//           <Col md={4}>
+//             <Card className="mb-4">
+//               <Card.Header>Daily Sales</Card.Header>
+//               <Card.Body>
+//                 <Line data={lineChartData} />
+//               </Card.Body>
+//             </Card>
+//           </Col>
+//           <Col md={4}>
+//             <Card className="mb-4">
+//               <Card.Header>Completed Tasks</Card.Header>
+//               <Card.Body>
+//                 <Line data={lineChartData} />
+//               </Card.Body>
+//             </Card>
+//           </Col>
+//         </Row>
+//       </Container>
+//     </Container>
+//   );
+// };
 
-        ? prevSelected.filter((userId) => userId !== id) // Deselect
-        : [...prevSelected, id] // Select
-    );
-  };
 
-  // Handle master checkbox change
-  const handleSelectAll = (e) => {
-    if (e.target.checked) {
-      setSelectedUsers(currentUsers.map((user) => user._id)); // Select all users on current page
-    } else {
-      setSelectedUsers([]); // Deselect all users
-    }
-  };
 
-  // Handle delete button for selected users
-  const handleDeleteSelected = async () => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete the selected users?"
-    );
-    if (!confirmed) return; // Exit if the user cancels
 
-    try {
-      await Promise.all(
-        selectedUsers.map((id)=>axios.delete(`http://localhost:5000/api/users/${id}`)
-        )
-      );
-      const updatedUsers = users.filter((user) => !selectedUsers.includes(user._id));
-      setUsers(updatedUsers);
-      setSelectedUsers([]); // Clear selected users after deletion
 
-      // Adjust current page if necessary
-      if (currentPage > Math.ceil(updatedUsers.length / usersPerPage)) {
-        setCurrentPage(Math.max(currentPage - 1, 1));
-      }
-    } catch (error) {
-      console.error("Error deleting users:", error.response?.data || error.message);
-      alert("Failed to delete selected users. Please try again.");
-    }
-  };
 
-  // Handle individual delete
-  const handleDelete = async (id)=> {
-    const confirmed = window.confirm("Are you sure you want to delete this user?");
-    if (!confirmed) return;
+// const EditUser = ({ users, setUsers }) => {
+//   const { id } = useParams();
+//   const navigate = useNavigate();
+//   const [user, setUser] = useState({
+//     name: '',
+//     email: '',
+//     phone: '',
+//     password: '',
+//     confirmPassword: '',
+//     date: new Date().toISOString().split('T')[0], // Default to today’s date
+//     image: '', // New field for storing base64 image
+//   });
 
-    try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`);
-      const updatedUsers = users.filter((user) => user._id !== id);
-      setUsers(updatedUsers);
+//   useEffect(() => {
+//     if (id)
+//  {
+//       const existingUser = users.find((u) => u._id === id);
+//       if (existingUser) {
+//         setUser({
+//           ...existingUser,
+//           date: moment(existingUser.date).format('YYYY-MM-DD'),
+//         });
+//       } else {
+//         navigate('/admin/users/manageuser');
+//       }
+//     }
+//   }, [id, users, navigate]);
 
-      // Adjust current page if necessary
-      if (currentPage > Math.ceil(updatedUsers.length / usersPerPage)) {
-        setCurrentPage(Math.max(currentPage - 1, 1));
-      }
-    } catch (error) {
-      console.error("Error deleting user:", error.response?.data || error.message);
-      alert("Failed to delete user. Please try again.");
-    }
-  };
 
-  // Handle search input change
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to first page on search
-  };
+//   const handleImageUpload = (e) => {
+//     const file = e.target.files[0];
+//     const maxSizeInMB = 2; // Set the limit to 2MB or adjust to any other size
+//     const maxSizeInBytes = maxSizeInMB  1024  1024;
 
-  // Handle page change
-  const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
+//     // Allowed MIME types for JPEG and PNG
+//     const allowedTypes = ['image/jpeg', 'image/png'];
 
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
+//     if (file) {
+//       // Check file type
+//       if (!allowedTypes.includes(file.type)) {
+//         alert('Only JPEG and PNG images are allowed.');
+//         return;
+//       }
 
-  return (
-    <Container className="p-5">
-      <Row className="mb-3">
-        <Col md={6}>
-          <h2>Users Section</h2>
-        </Col>
-        <Col md={6} className="d-flex justify-content-end">
-          <Button
-            variant="danger"
-            onClick={handleDeleteSelected}
-            disabled={selectedUsers.length === 0} // Disable if no users are selected
-          >
-            Delete Selected
-          </Button>
-        </Col>
-      </Row>
+//       // Check file size
+//       if (file.size > maxSizeInBytes) {
+//         alert(`File size should not exceed ${maxSizeInMB}MB.`);
+//         return;
+//       }
 
-      <Row className="mb-3">
-        <Col md={12}>
-          {/* {/ Search Box /} */}
-          <Form.Control
-            type="text"
-            placeholder="Search by name, email, phone, password, confirm password"
-            value={searchTerm}
-            onChange={handleSearchChange} // Update search term on change
-          />
-        </Col>
-      </Row>
+//       const reader = new FileReader();
+//       reader.onloadend = () => {
+//         setUser({ ...user, image: reader.result }); // Save base64 image
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
 
-      <Row>
-        <Col md={12}>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>
-                  <Form.Check
-                    type="checkbox"
-                    onChange={handleSelectAll}
-                    checked={
-                      currentUsers.length > 0 &&
-                      selectedUsers.length === currentUsers.length
-                    } // Select all if all users on current page are selected
-                  />
-                </th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Password</th>
-                <th>Confirm Password</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentUsers.length > 0 ? (
-                currentUsers.map((user) => (
-                  <tr key={user._id}>
-                    <td>
-                      <Form.Check
-                        type="checkbox"
-                        checked={selectedUsers.includes(user._id)} // Check if the user is selected
-                        onChange={() => handleCheckboxChange(user._id)}
-                      />
-                    </td>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>{user.phone}</td>
-                    <td>{user.password}</td>
-                    <td>{user.confirmPassword}</td>
-                    <td>
-                      <Button variant="info" as={Link} to={`/admin/users/view/${user._id}`}>
-                        View
-                      </Button>{' '}
-                      <Button variant="primary" as={Link} to={`/admin/users/edit/${user._id}`}>
-                        Edit
-                      </Button>{' '}
-                      <Button variant="danger" onClick={() => handleDelete(user._id)}>
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" className="text-center">
-                    No users found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
 
-      {/* {/ Pagination Section /} */}
-      {totalUsers > usersPerPage && (
-        <Row className="align-items-center">
-          <Col md={6}>
-            <p>
-              Showing {Math.min(indexOfFirstUser + 1, totalUsers)} to {Math.min(indexOfLastUser, totalUsers)} of {totalUsers} users
-            </p>
-          </Col>
-          <Col md={6} className="d-flex justify-content-end">
-            <Button
-              variant="secondary"
-              onClick={handlePreviousPage}
-              disabled={currentPage === 1}
-              className="me-2"
-            >
-              Previous
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </Button>
-          </Col>
-        </Row>
-      )}
-    </Container>
-  );
-};
+//     // Ensure the password and confirmPassword fields match
+//     // if (user.password !== user.confirmPassword) {
+//     //   window.alert('Passwords do not match');
+//     //   return;
+//     // }
 
-// EditUser Component
-const EditUser = ({ users, setUsers, viewMode = false }) => {
-  const { id } = useParams(); // Get the ID from the URL
-  const navigate = useNavigate();
-  const [user, setUser] = useState({ name: '', email: '', phone: '', password: '', confirmPassword: '' });
-  const [isLoading, setIsLoading] = useState(true); // State to track loading
-  const [error, setError] = useState(null); // State to track errors
+//     try {
+//       const formattedUser = {
+//         ...user,
+//         date: moment.utc(user.date, 'YYYY-MM-DD').toISOString(),
+//       };
 
-  // Fetch the user data when the component is mounted
-  useEffect(() => {
-    if (id)
- {
-      const fetchUser = async () => {
-        try {
-          const response = await axios.get(`http://localhost:5000/api/users/${id}`);
-          console.log("User data fetched:", response.data); // Debugging
-          setUser(response.data); // Set the user data in the state
-        } catch (error) {
-          console.error("Error fetching user:", error.response?.data || error.message);
-          setError("Failed to load user data. Please try again.");
-        } finally {
-          setIsLoading(false); // Set loading to false after the request
-        }
-      };
-      fetchUser();
-    } else {
-      setIsLoading(false); // If not editing, we are adding a new user, so we can stop loading immediately
-    }
-  }, [id]);
+//       if (id)
+//  {
+//         // Update existing user
+//         await axios.put(`http://localhost:5000/edituser/${id}`, formattedUser);
+//         const updatedUsers = users.map((u) =>
+//           u._id === id ? { ...formattedUser, date: moment(formattedUser.date).format('YYYY-MM-DD') } : u
+//         );
+//         setUsers(updatedUsers);
+//         window.alert('User updated successfully!');
+//       } else {
+//         // Add new user
+//         const response = await axios.post('http://localhost:5000/adduser', formattedUser);
+//         setUsers((prevUsers) => [response.data, ...prevUsers]);
+//         window.alert('User Added Successfully!');
+//       }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (viewMode) return; // Prevent submission in view mode
-    try {
-      if (id)
- {
-        const response = await axios.put(`http://localhost:5000/api/users/${id}`, user);
-        const updatedUsers = users.map(u => (u._id === id ? response.data : u));
-        setUsers(updatedUsers); // Update the user list in the parent component
-      } else {
-        const response = await axios.post('http://localhost:5000/api/users', user);
-        setUsers([response.data, ...users]); // Add a new user to the top of the list
-      }
-      navigate('/admin/users/manage'); // Navigate back to the manage users page
-    } catch (error) {
-      console.error("Error saving user:", error.response?.data || error.message);
-      setError("Failed to save user data. Please try again."); // Set error state
-    }
-  };
+//       // Redirect after submission
+//       navigate('/admin/users/manageuser');
+//     } catch (err) {
+//       console.error('Error saving user:', err);
+//     }
+//   };
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
 
-  const handleBack = () => {
-    navigate('/admin/users/manage'); // Navigate back to Manage Users
-  };
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Show a loading message while fetching the user data
-  }
 
-  if (error) {
-    return <div>{error}</div>; // Display any error that occurs during data fetching
-  }
+//   return (
+//     <Container className="signclass">
+//       <Row className="signrow">
+//         <Col>
+//           <h6 className="addnew mt-2">{id ? 'Edit User' : 'Add New User'}</h6>
+//           <Form onSubmit={handleSubmit} className="mt-3">
+//             <Form.Group className="name">
+//               <Form.Label>Upload Image</Form.Label>
+//               <Form.Control
+//                 type="file"
+//                 accept="image/*"
+//                 onChange={handleImageUpload}
+//                 className="nametext"
+//               />
+//               {user.image && (
+//                 <div className="mt-3">
+//                   <img src={user.image} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
+//                 </div>
+//               )}
+//             </Form.Group>
 
-  return (
-    <Container className="p-5">
-      <h2>{viewMode ? 'View User' : id ? 'Edit User' : 'Add User'}</h2>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            value={user.name}
-            onChange={handleChange}
-            required
-            disabled={viewMode} // Disable if in view mode
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-            required
-            disabled={viewMode} // Disable if in view mode
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Phone</Form.Label>
-          <Form.Control
-            type="text"
-            name="phone"
-            value={user.phone}
-            onChange={handleChange}
-            required
-            disabled={viewMode} // Disable if in view mode
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-            required
-            disabled={viewMode} // Disable if in view mode
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="confirmPassword"
-            value={user.confirmPassword}
-            onChange={handleChange}
-            required
-            disabled={viewMode} // Disable if in view mode
-          />
-        </Form.Group>
-        {/* {/ Back to Manage Users Button /} */}
-        {viewMode && (
-          <Button variant="secondary" className="mt-3" onClick={handleBack}>
-            Back to Manage Users
-          </Button>
-        )}
-        {!viewMode && (
-          <Button variant="success" type="submit" className="mt-3">
-            {id ? 'Update User' : 'Add User'}
-          </Button>
-        )}
-      </Form>
-    </Container>
-  );
-};
 
-// AdminPanel Component
-const AdminPanel = () => {
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching users:", error.response?.data || error.message);
-      }
-    };
-    fetchUsers();
-  }, []);
+//             <Form.Group controlId="name" className="mt-3 name">
+//               <Form.Label>Name</Form.Label>
+//               <Form.Control
+//                 type="text"
+//                 placeholder="Enter Name"
+//                 value={user.name}
+//                 onChange={(e) => setUser({ ...user, name: e.target.value })}
+//                 required
+//                 className="nametext"
+//               />
+//             </Form.Group>
 
-  const navigate = useNavigate();
+//             <Form.Group controlId="email" className="mt-3 name">
+//               <Form.Label>Email Address</Form.Label>
+//               <Form.Control
+//                 type="email"
+//                 placeholder="Enter Email Address"
+//                 value={user.email}
+//                 onChange={(e) => setUser({ ...user, email: e.target.value })}
+//                 required
+//                 className="nametext"
+//               />
+//             </Form.Group>
 
-  const handleLogout = () => {
-    navigate('/login');
-  };
+//             <Form.Group className="mt-3 name">
+//               <Form.Label>Phone Number</Form.Label>
+//               <Form.Control
+//                 type="tel"
+//                 value={user.phone}
+//                 onChange={(e) => setUser({ ...user, phone: e.target.value })}
+//                 placeholder="Enter Phone number"
+//                 required
+//                 className="nametext"
+//               />
+//             </Form.Group>
 
-  return (
-    <Container fluid className="p-0" style={{ backgroundColor: '#f8f9fa' }}>
-      <Navbar bg="success" variant="light" expand="lg" className="px-5">
-        <Navbar.Brand style={{ color: '#00bfff' }}>Admin Panel</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            {/* <Nav.Link as={Link} to="/admin/dashboard" className="text-white">Dashboard</Nav.Link>
-            <Nav.Link as={Link} to="/admin/courses" className="text-white">Courses</Nav.Link>
-            <Dropdown align="end">
-              <Dropdown.Toggle variant="success" id="dropdown-basic" className="text-white">
-                Users
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/admin/users/manage">Manage Users</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/admin/users/add">Add User</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown> */}
-            <Nav.Link href="#" style={{ color: '#ffffff' }}>Demo User</Nav.Link>
-            <Button onClick={handleLogout} variant="outline-light" className="ms-3">Logout</Button>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <Row>
-        <Col md={2} className="sidebar">
-          <Nav className="flex-column">
-            <div className="sidebar-section">
-              <FaBars className="icon" />
-              <Nav.Link as={Link} to="/admin/dashboard" className="text-white">Dashboard</Nav.Link>
-              <FaChevronRight className="arrow-icon" />
-            </div>
-            <div className="sidebar-section">
-              <FaBars className="icon" />
-              <Nav.Link as={Link} to="/admin/courses" className="text-white">Courses</Nav.Link>
-              <FaChevronRight className="arrow-icon" />
-            </div>
-            <div className="sidebar-section">
-              <FaBars className="icon" />
-              <Dropdown>
-                <Dropdown.Toggle className="text-white dropdown-toggle">Users</Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item as={Link} to="/admin/users/manage">Manage Users</Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/admin/users/add">Add User</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <FaChevronRight className="arrow-iconi" />
-            </div>
-          </Nav>
-        </Col>
-        <Col md={10} className="p-0">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/users/manage" element={<Users users={users} setUsers={setUsers} />} />
-            <Route path="/users/add" element={<EditUser users={users} setUsers={setUsers} />} />
-            <Route path="/users/edit/:id" element={<EditUser users={users} setUsers={setUsers} />} />
-            <Route path="/users/view/:id" element={<EditUser users={users} setUsers={setUsers} viewMode={true} />} />
-            {/* {/ Add other routes here as needed /} */}
-          </Routes>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+//             <Form.Group controlId="password" className="mt-3 name">
+//               <Form.Label>Password</Form.Label>
+//               <Form.Control
+//                 type="password"
+//                 placeholder="Enter Password"
+//                 value={user.password}
+//                 onChange={(e) => setUser({ ...user, password: e.target.value })}
+//                 required
+//                 className="nametext"
+//               />
+//             </Form.Group>
 
-export default AdminPanel;
+//             <Form.Group className="mt-3 name">
+//               <Form.Label>Confirm Password</Form.Label>
+//               <Form.Control
+//                 type="password"
+//                 placeholder="Confirm Password"
+//                 value={user.confirmPassword}
+//                 onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
+//                 required
+//                 className="nametext"
+//               />
+//             </Form.Group>
+
+//             {/* {/ Date Field /} */}
+//             <Form.Group className="mt-3 name">
+//               <Form.Label>Date</Form.Label>
+//               <Form.Control
+//                 type="date"
+//                 value={user.date}
+//                 onChange={(e) => setUser({ ...user, date: e.target.value })}
+//                 required
+//                 className="nametext"
+//               />
+//             </Form.Group>
+//             <Button type="submit" className="w-100 mt-3 addbutton">
+//               {id ? 'Save Changes' : 'Add User'}
+//             </Button>
+//           </Form>
+//         </Col>
+//       </Row>
+//     </Container>
+//   );
+// };
+
+
+// const AllUsers = ({ users, setUsers }) =>{
+//   const [selectedUsers, setSelectedUsers] = useState([]);
+//   const [searchQuery, setSearchQuery] = useState('');
+//   const [fromDate, setFromDate] = useState('');
+//   const [toDate, setToDate] = useState('');
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const [usersPerPage, setUsersPerPage] = useState(5); // Default 5 users per page
+
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:5000/users');
+//         setUsers(response.data.reverse()); // Reverse the array to have the newest at the top
+//       } catch (err) {
+//         console.error('Error fetching users:', err);
+//       }
+//     };
+//     fetchUsers();
+//   }, [setUsers]);
+
+//   const handleDelete = async (id)
+//  => {
+//     const confirmed = window.confirm('Are you sure you want to delete this user?');
+//     if (!confirmed) return;
+
+//     try {
+//       await axios.delete(`http://localhost:5000/users/${id}`);
+//       setUsers(users.filter((user) => user._id !== id));
+//     } catch (err) {
+//       console.error('Error deleting user:', err);
+//     }
+//   };
+
+//   const handleBulkDelete = async () => {
+//     const confirmed = window.confirm('Are you sure you want to delete the selected users?');
+//     if (!confirmed) return;
+
+//     try {
+//       await Promise.all(selectedUsers.map((id)
+//  => axios.delete(`http://localhost:5000/users/${id}`)));
+//       setUsers(users.filter((user) => !selectedUsers.includes(user._id)));
+//       setSelectedUsers([]);
+//     } catch (err) {
+//       console.error('Error deleting users:', err);
+//     }
+//   };
+
+//   const handleSelectUser = (id)
+//  => {
+//     setSelectedUsers((prevSelected) =>
+//       prevSelected.includes(id)
+//  ? prevSelected.filter((userId) => userId !== id) : [...prevSelected, id]
+//     );
+//   };
+
+//   const handleSelectAll = (e) => {
+//     if (e.target.checked) {
+//       setSelectedUsers(users.map((user) => user._id));
+//     } else {
+//       setSelectedUsers([]);
+//     }
+//   };
+
+//   const handleViewUser = (user) => {
+//     const userDetails = `
+//       Name: ${user.name}
+//       Email: ${user.email}
+//       Phone: ${user.phone}
+//       Date: ${user.date}
+//       Password: ${user.password}
+//       Confirm Password: ${user.confirmPassword}
+//     `;
+//     window.alert(userDetails);
+//   };
+
+//   const filteredUsers = users.filter((user) => {
+//     const userDate = new Date(user.date);
+//     const from = fromDate ? new Date(fromDate) : null;
+//     const to = toDate ? new Date(toDate) : null;
+
+//     return (
+//       (!from || userDate >= from) &&
+//       (!to || userDate <= to) &&
+//       ((user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+//         (user.email && user.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
+//         (user.phone && user.phone.includes(searchQuery)))
+//     );
+//   });
+
+//   // Pagination logic
+//   const indexOfLastUser = currentPage * usersPerPage;
+//   const indexOfFirstUser = indexOfLastUser - usersPerPage;
+//   const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+//   const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+
+//   const handlePageChange = (pageNumber) => {
+//     setCurrentPage(pageNumber);
+//   };
+
+//   const handleUsersPerPageChange = (e) => {
+//     setUsersPerPage(parseInt(e.target.value, 10));
+//     setCurrentPage(1); // Reset to page 1 when changing number of users per page
+//   };
+
+//   // PDF Export
+//   const downloadPDF = () => {
+//     const doc = new jsPDF();
+//     const tableData = currentUsers.map((user, index) => [
+
+//       index + 1,
+//       user.name,
+//       user.email,
+//       user.phone,
+//       moment.utc(user.date).local().format('DD/MM/YYYY'),
+//       user.password,
+//     ]);
+
+//     doc.autoTable({
+//       head: [['S.No', 'Name', 'Email', 'Phone', 'Date', 'Password']],
+//       body: tableData,
+//     });
+//     doc.save('users_data.pdf');
+//   };
+
+//   // const downloadPDF = () => {
+//   //   const doc = new jsPDF();
+  
+//   //   const tableData = currentUsers.map((user, index) => {
+//   //     const imgData = user.image ? user.image : ''; // If no image, leave blank
+  
+//   //     return [
+//   //       index + 1,
+//   //       imgData, // Add the image data to the table
+//   //       user.name,
+//   //       user.email,
+//   //       user.phone,
+//   //       moment.utc(user.date).local().format('DD/MM/YYYY'),
+//   //       user.password
+       
+//   //     ];
+//   //   });
+  
+//   //   doc.autoTable({
+//   //     head: [['S.No', 'Image','Name', 'Email', 'Phone', 'Date', 'Password']],
+//   //     body: tableData,
+//   //     didDrawCell: (data) => {
+//   //       if (data.column.index === 6 && data.cell.raw) { // Column index 6 for images
+//   //         doc.addImage(data.cell.raw, 'JPEG', data.cell.x + 2, data.cell.y + 2, 15, 15); // Adjust image size and position
+//   //       }
+//   //     }
+//   //   });
+  
+//   //   doc.save('users_data.pdf');
+//   // };
+  
+
+
+
+//   // Excel Export
+ 
+ 
+//   const downloadExcel = () => {
+//     const worksheet = XLSX.utils.json_to_sheet(
+//       currentUsers.map((user, index) => ({
+//         S_No: index + 1,
+//         Name: user.name,
+//         Email: user.email,
+//         Phone: user.phone,
+//         Date: moment.utc(user.date).local().format('DD/MM/YYYY'),
+//         Password: user.password,
+//       }))
+//     );
+//     const workbook = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
+//     XLSX.writeFile(workbook, 'users_data.xlsx');
+//   };
+//   // const downloadExcel = () => {
+//   //   const worksheet = XLSX.utils.json_to_sheet(
+//   //     currentUsers.map((user, index) => ({
+//   //       S_No: index + 1,
+//   //       Image_URL: user.image || 'No Image', // Add the image URL
+//   //       Name: user.name,
+//   //       Email: user.email,
+//   //       Phone: user.phone,
+//   //       Date: moment.utc(user.date).local().format('DD/MM/YYYY'),
+//   //       Password: user.password
+       
+//   //     }))
+//   //   );
+  
+//   //   const workbook = XLSX.utils.book_new();
+//   //   XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
+//   //   XLSX.writeFile(workbook, 'users_data.xlsx');
+//   // };
+  
+
+//   // CSV Export
+//   const downloadCSV = () => {
+//     const worksheet = XLSX.utils.json_to_sheet(
+//       currentUsers.map((user, index) => ({
+//         S_No: index + 1,
+//         Name: user.name,
+//         Email: user.email,
+//         Phone: user.phone,
+//         Date: moment.utc(user.date).local().format('DD/MM/YYYY'),
+//         Password: user.password,
+//       }))
+//     );
+//     const csv = XLSX.utils.sheet_to_csv(worksheet);
+//     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+//     const url = URL.createObjectURL(blob);
+//     const link = document.createElement('a');
+//     link.setAttribute('href', url);
+//     link.setAttribute('download', 'users_data.csv');
+//     document.body.appendChild(link)
+// ;
+//     link.click();
+//     document.body.removeChild(link)
+// ;
+//   };
+
+ 
+  
+
+//   return (
+//     <Container className="manage-products-container p-5">
+//       <Row>
+//         <Col md={12}>
+//           {selectedUsers.length > 0 && (
+//              <Button variant="danger" className="bulkdelete" onClick={handleBulkDelete}>
+//              Delete Selected ({selectedUsers.length})
+//            </Button>
+//          )}
+//          <h2 className="text-left manageuser">Manage Users</h2>
+//          <div className='down mt-4'>
+//            <div className="filter-container">
+//              <input
+//                type="text"
+//                placeholder="Search by name, email, or phone number"
+//                value={searchQuery}
+//                onChange={(e) => setSearchQuery(e.target.value)}
+//                className="searchbar"
+//              />
+
+//              {/ Date Range Filter /}
+//              <div className="date-filter ">
+//                From Date
+//                <Form.Control
+//                  type="date"
+//                  value={fromDate}
+//                  onChange={(e) => setFromDate(e.target.value)}
+//                  placeholder="From Date"
+//                  className="date searchbar"
+//                />
+//                To Date
+//                <Form.Control
+//                  type="date"
+//                  value={toDate}
+//                  onChange={(e) => setToDate(e.target.value)}
+//                  placeholder="To Date"
+//                  className="date searchbar"
+//                />
+//              </div>
+
+//              {/* {/ Users Per Page Dropdown /} */}
+//              <div>
+//                <label htmlFor="usersPerPage">Users per page: </label>
+//                <select id="usersPerPage" value={usersPerPage} onChange={handleUsersPerPageChange}>
+//                  <option value={5}>5</option>
+//                  <option value={10}>10</option>
+//                  <option value={15}>15</option>
+//                  <option value={30}>30</option>
+//                </select>
+//              </div>
+
+//              {/* {/ Icons for PDF, Excel, CSV /} */}
+//              <div className="icons">
+//                <FaFilePdf className="pdf-icon" onClick={downloadPDF} />
+//                <PiMicrosoftExcelLogoFill className="excel-icon" onClick={downloadExcel} />
+//                <FaFileCsv className="csv-icon" onClick={downloadCSV} />
+//              </div>
+//            </div>
+//          </div>
+
+//          {/* {/ User Table /} */}
+//          <Table striped bordered hover className="product-table mt-3">
+//            <thead>
+//              <tr>
+//                <th>
+//                  <input
+//                    type="checkbox"
+//                    onChange={handleSelectAll}
+//                    checked={selectedUsers.length === users.length}
+//                  />
+//                </th>
+//                <th>S.No</th>
+//                <th>Image</th>
+//                <th>Name</th>
+//                <th>Email</th>
+//                <th>Phone</th>
+//                <th>Date</th>
+//                <th>Password</th>
+//                <th>Actions</th>
+//              </tr>
+//            </thead>
+//            <tbody>
+//              {currentUsers.map((user, index) => (
+//                <tr key={user._id}>
+//                  <td>
+//                    <input
+//                      type="checkbox"
+//                      checked={selectedUsers.includes(user._id)}
+//                      onChange={() => handleSelectUser(user._id)}
+//                    />
+//                  </td>
+//                  <td>{indexOfFirstUser + index + 1}</td>
+//                  <td>
+//                    {user.image ? (
+//                      <img src={user.image} alt="user" style={{ width: '50px', height: '50px' }} />
+//                    ) : (
+//                      'No Image'
+//                    )}
+//                  </td>
+//                  <td>{user.name}</td>
+//                  <td>{user.email}</td>
+//                  <td>{user.phone}</td>
+//                  <td>{moment.utc(user.date).local().format('DD/MM/YYYY')}</td>
+//                  <td>{user.password}</td>
+//                  <td>
+//                    <Button variant="secondary" className="mx-1" onClick={() => handleViewUser(user)}>
+//                      View
+//                    </Button>
+//                    <Button as={Link} to={`/admin/users/edituser/${user._id}`} variant="primary" className="mr-2">
+//                      Edit
+//                    </Button>
+//                    <Button variant="danger" onClick={() => handleDelete(user._id)} className="mx-1">
+//                      Delete
+//                    </Button>
+//                  </td>
+//                </tr>
+//              ))}
+//            </tbody>
+//          </Table>
+
+//          {/* {/ Pagination Controls /} */}
+//          <div className="pagination">
+//            {Array.from({ length: totalPages }, (_, index) => (
+//              <Button
+//                key={index + 1}
+//                onClick={() => handlePageChange(index + 1)}
+//                variant={index + 1 === currentPage ? 'primary' : 'secondary'}
+//                className="mx-1"
+//              >
+//                {index + 1}
+//              </Button>
+//            ))}
+//          </div>
+//        </Col>
+//      </Row>
+//    </Container>
+//  );
+// };
+
+// // export default AllUsers;
+
+// const Reports = () => <h2 className="p-5">Overall-Reports Section</h2>;
+
+
+// // Admin Panel Component
+// const AdminPanel = () => {
+//  const [users, setUsers] = useState([
+//    { id: 1, name: 'John Doe', email: 'john@example.com', phone: '1234567890', password: 'password123', confirmPassword: 'password123' },
+//    { id: 2, name: 'Jane Smith', email: 'jane@example.com', phone: '2345678901', password: 'password234', confirmPassword: 'password234' }
+
+//  ]);
+//  const navigate = useNavigate();
+
+//  const handleLogout = () => {
+//    navigate('/login');
+//  };
+
+//  return (
+//    <Container fluid className="p-0" style={{ backgroundColor: 'white' }}>
+//      <Navbar id="navebar" expand="lg" className="px-5">
+//        <Navbar.Brand style={{ color: 'white', fontSize: '1.6rem' }}>Admin Panel</Navbar.Brand>
+//        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+//        <Navbar.Collapse id="basic-navbar-nav">
+//          <Nav className="ms-auto">
+//            <Nav.Link href="#" style={{ color: '#ffffff' }}>Demo User</Nav.Link>
+//            <Button onClick={handleLogout} variant="outline-light" className="ms-3">Logout</Button>
+//          </Nav>
+//        </Navbar.Collapse>
+//      </Navbar>
+//      <Row>
+//        <Col md={2} className="sidebar">
+//          <Nav className="flex-column">
+//            <div className="sidebar-section">
+//              <MdSpaceDashboard className="icon" />
+//              <Nav.Link as={Link} to="/admin" className="text-white">Dashboard</Nav.Link>
+//              <FaChevronRight className="arrow-icon" />
+//            </div>
+//            <Dropdown>
+//              <Dropdown.Toggle id="dropdown-basic">Users</Dropdown.Toggle>
+//              <Dropdown.Menu>
+//                <Dropdown.Item as={Link} to="/admin/users/addnew">Add New User</Dropdown.Item>
+//                <Dropdown.Item as={Link} to="/admin/users/manageuser">Manage User</Dropdown.Item>
+//              </Dropdown.Menu>
+//            </Dropdown>
+//            <div className="sidebar-section">
+//              <TbReportSearch className="icon" />
+//              <Nav.Link as={Link} to="/admin/reports" className="text-white">Reports</Nav.Link>
+//              <FaChevronRight className="arrow-icon" />
+//            </div>
+//          </Nav>
+//        </Col>
+//        <Col md={10}>
+//          <Routes>
+//            <Route path="/" element={<Dashboard />} />
+//            <Route path="/users/addnew" element={<EditUser users={users} setUsers={setUsers} />} />
+//            <Route path="/users/edituser/:id" element={<EditUser users={users} setUsers={setUsers} />} />
+//            <Route path="/users/manageuser" element={<AllUsers users={users} setUsers={setUsers} />} />
+//            <Route path="/reports" element={<Reports />} />
+//          </Routes>
+
+//        </Col>
+//      </Row>
+//    </Container>
+//  );
+// };
+
+// export default AdminPanel;

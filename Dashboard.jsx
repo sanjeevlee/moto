@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Navbar, Nav, Button, Row, Col, Card, Table, Form, Dropdown } from 'react-bootstrap';
 import { useNavigate, Link, Route, Routes, useParams } from 'react-router-dom';
-import { FaBars, FaChevronRight, FaUser ,FaRegEye , FaEdit } from 'react-icons/fa';
+import { FaBars, FaChevronRight, FaUser ,FaRegEye , FaEdit,FaFileExcel, FaFilePdf,FaFileCsv } from 'react-icons/fa';
 import { MdDelete } from "react-icons/md";
 import { GoArrowRight , GoArrowLeft } from "react-icons/go";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -11,6 +11,9 @@ import './Dashboard.css';
 import Addusers from './Adduser';
 import axios from 'axios';
 import Profile from './profile';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const Dashboard = () => {
   return (
@@ -75,7 +78,8 @@ const Users = ({ users, setUsers }) => {
   const [selectedUsers, setSelectedUsers] = useState([]); // State to track selected users
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
   const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const usersPerPage = 5; // Number of users per page
+  // const usersPerPage = 5; // Number of users per page
+  const [usersPerPage, setUsersPerPage] = useState(5); // Default 5 users per page
 
   const sortedUsers = [...users].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
@@ -176,7 +180,62 @@ const Users = ({ users, setUsers }) => {
       setCurrentPage(currentPage + 1);
     }
   };
+  const handleUsersPerPageChange = (e) => {
+    setUsersPerPage(parseInt(e.target.value, 10));
+    setCurrentPage(1); // Reset to page 1 when changing number of users per page
+  };
 
+  // Function to download table data as Excel file
+  const downloadExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(currentUsers.map(user => ({
+      Name: user.name,
+      Email: user.email,
+      Phone: user.phone,
+      Password: user.password
+    })));
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
+    XLSX.writeFile(workbook, "users.xlsx");
+  };
+
+  // Function to download table data as PDF
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    const tableColumn = ["Name", "Email", "Phone", "Password"];
+    const tableRows = currentUsers.map(user => [
+      user.name, user.email, user.phone, user.password
+    ]);
+
+    doc.text("User Data", 20, 10);
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+    });
+    doc.save("users.pdf");
+  };
+  const downloadCSV = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      currentUsers.map((user, index) => ({
+        S_No: index + 1,
+        Name: user.name,
+        Email: user.email,
+        Phone: user.phone,
+        // Date: moment.utc(user.date).local().format('DD/MM/YYYY'),
+        Password: user.password,
+      }))
+    );
+    const csv = XLSX.utils.sheet_to_csv(worksheet);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'users_data.csv');
+    document.body.appendChild(link)
+;
+    link.click();
+    document.body.removeChild(link)
+;
+  };
   return (
     <Container className="p-5">
       <Row className="mb-3">
@@ -184,12 +243,32 @@ const Users = ({ users, setUsers }) => {
           <h2>Users Section</h2>
         </Col>
         <Col md={6} className="d-flex justify-content-end">
+        <div>
+               <label htmlFor="usersPerPage">Users per page: </label>
+               <select id="usersPerPage" value={usersPerPage} onChange={handleUsersPerPageChange}>
+                 <option value={5}>5</option>
+                 <option value={10}>10</option>
+                 <option value={15}>15</option>
+                 <option value={30}>30</option>
+               </select>
+             </div>
+
           <Button
             variant="danger"
             onClick={handleDeleteSelected}
             disabled={selectedUsers.length === 0} // Disable if no users are selected
           >
             <RiDeleteBin6Line />
+          </Button>
+          <Button variant="primary" className="ms-2" onClick={downloadExcel}>
+          <FaFileExcel />
+          </Button>
+          <Button variant="primary" className="ms-2" onClick={downloadPDF}>
+          <FaFilePdf />
+          </Button>
+          <Button variant="primary" className="ms-2" onClick={downloadCSV} >
+          <FaFileCsv />
+
           </Button>
         </Col>
       </Row>
@@ -355,7 +434,7 @@ const EditUser = ({ users, setUsers, viewMode = false }) => {
         setUsers(updatedUsers); // Update the user list in the parent component
       } else {
         const response = await axios.post('http://localhost:5000/api/users', user);
-        setUsers([ response.data , ...users  ]); // Add a new user to the top of the list
+        setUsers([response.data, ...users]); 
       }
       navigate('/admin/users/manage'); // Navigate back to the manage users page
     } catch (error) {
@@ -515,11 +594,12 @@ const AdminPanel = () => {
                 Users
               </Dropdown.Toggle>
               <Dropdown.Menu style={{ backgroundColor: '#f8f9fc' }}>
+              <Dropdown.Item as={Link} to="/admin/users/add">Add User</Dropdown.Item>
                 <Dropdown.Item as={Link} to="/admin/users/manage">Manage Users</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/admin/users/add">Add User</Dropdown.Item>
+               
               </Dropdown.Menu>
             </Dropdown>
-            <FaChevronRight className="arrow-icon" />
+            
           </div>
             <div className="sidebar-section">
               <FaBars className="icon" />

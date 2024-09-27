@@ -1,27 +1,27 @@
 import Project from './Project';
 import './App.css';
 import AboutUs from './Aboutus';
-import Service from './Service';
+// import Service from './Service';
 import Contact from './Contact';
 import SignIn from './Signin';
 import Signup from './Signup';
-import './Signup.css';
+// import './Signup.css';
 import  Footer from './Footer';
 // import './Navbar.css';
 import Navbr from './Navbar';
 
-import Blog from './Blog';
+// import Blog from './Blog';
 import TestimonialCarousel from './Carosal';
 import LoginPage from './Admin';
-import Dashboard from './Dashboard';
-import Addusers from './Adduser';
+// import Dashboard from './Dashboard';
+// import Addusers from './Adduser';
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-     {/* <Project/>  */}
+     <Project/> 
      {/* <AboutUs/> */}
      {/* <Service/> */}
      {/* <Contact/> */}
@@ -33,7 +33,7 @@ function App() {
    {/* <TestimonialCarousel/> */}
      {/* <RegisterForm/> */}
      {/* <LoginPage/> */}
-     <Dashboard />
+     {/* <Dashboard /> */}
      {/* <Addusers/> */}.
      {/* <AdminPanel/> */}
       </header>
