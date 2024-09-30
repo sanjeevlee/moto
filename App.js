@@ -13,8 +13,11 @@ import Navbr from './Navbar';
 // import Blog from './Blog';
 import TestimonialCarousel from './Carosal';
 import LoginPage from './Admin';
+import RegisterForm from './Reg';
+// import './Reg.css';
 // import Dashboard from './Dashboard';
 // import Addusers from './Adduser';
+
 
 
 function App() {
@@ -36,6 +39,7 @@ function App() {
      {/* <Dashboard /> */}
      {/* <Addusers/> */}.
      {/* <AdminPanel/> */}
+     {/* <RegisterForm/> */}
       </header>
     </div>
   );
