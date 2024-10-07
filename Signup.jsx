@@ -31,6 +31,7 @@ const Signup = () => {
       }
 
       alert('User registered successfully');
+      
       navigate('/project');  
     } catch (error) {
       console.error('Error:', error);

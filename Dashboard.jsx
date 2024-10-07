@@ -250,6 +250,7 @@ const Users = ({ users, setUsers }) => {
                  <option value={10}>10</option>
                  <option value={15}>15</option>
                  <option value={30}>30</option>
+                 <option value={300}>300</option>
                </select>
              </div>
 
